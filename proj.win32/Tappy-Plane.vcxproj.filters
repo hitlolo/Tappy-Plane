@@ -10,27 +10,51 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="classes">
+      <UniqueIdentifier>{1fcd0b5e-7454-4f29-81bd-7f843e714be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="classes\Gameing">
+      <UniqueIdentifier>{1acdf6e1-a5a6-4b9b-bcf6-1e6d43b0fd9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="classes\Loading">
+      <UniqueIdentifier>{359ef837-e561-4adb-a24e-64764c9245c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="classes\Helper">
+      <UniqueIdentifier>{6cb9248e-e381-4eb7-8f56-e64674a7ab15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AppDelegate.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\HelloWorldScene.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LogoScene.cpp">
+      <Filter>classes\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\JsonReader.cpp">
+      <Filter>classes\Helper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AppDelegate.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\HelloWorldScene.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LogoScene.h">
+      <Filter>classes\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\JsonReader.h">
+      <Filter>classes\Helper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

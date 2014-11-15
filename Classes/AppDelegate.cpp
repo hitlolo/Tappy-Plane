@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "LogoScene.h"
 
 USING_NS_CC;
 
@@ -24,13 +24,31 @@ void AppDelegate::initGLContextAttrs()
 
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
+
+//#if (CC_TARGET_PLATFORM !=CC_TARGET_WIN32)//Android下需要复制数据文件
+//	//检查数据库文件是否已经提取
+//	if (isFileExist("image.json") == false)
+//	{
+//		copyData("image.json");//要使用的sqlite库文件
+//	}
+//#endif
+
+
+	std::vector<std::string> paths;
+	paths.push_back("fonts");
+	paths.push_back("image");
+	paths.push_back("sounds");
+	FileUtils::getInstance()->setSearchPaths(paths);
+
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
         glview = GLViewImpl::create("My Game");
+		glview->setFrameSize(800,480);
         director->setOpenGLView(glview);
+		
     }
-
+	glview->setDesignResolutionSize(800, 480, ResolutionPolicy::FIXED_WIDTH);
     // turn on display FPS
     director->setDisplayStats(true);
 
@@ -38,7 +56,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+	auto scene = LogoScene::createScene();
 
     // run
     director->runWithScene(scene);
@@ -61,3 +79,4 @@ void AppDelegate::applicationWillEnterForeground() {
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }
+
