@@ -1,7 +1,33 @@
 {
     
         "logo":"MyLogo.png",
-        "background":"background.png"
-   
+        "background":"background.png",
+        "cloud":"SingleCloud.png",
+        "font":"plane-font.fnt",
+        "font_ttf":"kenvector_future.ttf",
+        "button_play":"buttonLarge.png",
+        "button_credits":"buttonCredits.png",
+        "plane_blue_1":"planeBlue1.png",
+        "plane_blue_2":"planeBlue2.png",
+        "plane_blue_3":"planeBlue3.png",
+        "plane_green_1":"planeGreen1.png", 
+        "plane_green_2":"planeGreen2.png", 
+        "plane_green_3":"planeGreen3.png", 
+        "plane_red_1":"planeRed1.png", 
+        "plane_red_2":"planeRed2.png", 
+        "plane_red_3":"planeRed3.png", 
+        "plane_yellow_1":"planeYellow1.png", 
+        "plane_yellow_2":"planeYellow2.png", 
+        "plane_yellow_3":"planeYellow3.png",
+        "uibackground":"UIbg.png",
+        "ready":"textGetReady.png",
+        "tap":"tap.png",
+        "tap_click":"tapTick.png",
+        "tap_tag_right":"tapRight.png",
+        "tap_tag_left":"tapLeft.png",
+        "puff1":"puffLarge.png",
+        "puff2":"puffSmall.png"
+
 
 }
+

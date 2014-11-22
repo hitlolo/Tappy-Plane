@@ -6,13 +6,16 @@
 JsonReader* JsonReader::jsonReader = nullptr;
 
 
-JsonReader*  JsonReader::getInstance(){
+JsonReader*  JsonReader::getInstance()
+{
 
 
-	if (jsonReader == nullptr){
+	if (jsonReader == nullptr)
+	{
 
-		auto jsonReader = new JsonReader();
-		if (!jsonReader){
+		jsonReader = new JsonReader();
+		if (!jsonReader)
+		{
 			CC_SAFE_DELETE(jsonReader);
 			CCLOG("JSON READER INIT FAIL£¡");  
 		}
@@ -29,14 +32,16 @@ JsonReader::~JsonReader(){
 }
 
 
-JsonReader::JsonReader(){
+JsonReader::JsonReader()
+{
 
 	jsonStr =this->getJsonData();
-	
+	decoder.Parse<kParseDefaultFlags>(jsonStr.c_str());
 }
 
 
-std::string JsonReader::getJsonData(){
+std::string JsonReader::getJsonData()
+{
 
 	std::string filename = "image.json";
 	std::string filepath = FileUtils::getInstance()->fullPathForFilename(filename);
@@ -52,20 +57,19 @@ std::string JsonReader::getJsonData(){
 }
 
 
-std::string JsonReader::getPathFromJson(const std::string key){
-
-
-	rapidjson::Document decoder;
-	decoder.Parse<kParseDefaultFlags>(jsonStr.c_str());
+std::string JsonReader::getPathFromJson(const std::string key)
+{
 
 	if (!decoder.IsNull())  
 	{
-		if (decoder.HasParseError()){
+		if (decoder.HasParseError())
+		{
 			CCLOG("GetParseError %s\n", decoder.GetParseError());
 		}
 		
-		if (decoder.IsObject()){
-			CCLOG("!decoder.IsObject().");
+		if (decoder.IsObject())
+		{
+			//CCLOG("!decoder.IsObject().");
 			const rapidjson::Value &value = decoder[key.c_str()];
 
 			std::string str = value.GetString();

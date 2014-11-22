@@ -7,6 +7,7 @@
 #include "json/rapidjson.h"
 #include "json/document.h"
 
+
 USING_NS_CC;
 using namespace rapidjson;
 
@@ -19,17 +20,19 @@ public:
 
 	std::string getPathFromJson(const std::string key);
 
+
+private:
+
 	JsonReader();
 
 	~JsonReader();
-
-private:
+	
 
 	static JsonReader* jsonReader;
 
 	std::string jsonStr;
 
-	std::string fileName;
+	rapidjson::Document decoder;
 
 	std::string getJsonData();
 

@@ -57,9 +57,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
 	auto scene = LogoScene::createScene();
-
+	/*TransitionScene *transition = TransitionFade::create(2.0f, scene);*/
     // run
-    director->runWithScene(scene);
+	director->runWithScene(scene);
+
 
     return true;
 }

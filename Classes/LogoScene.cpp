@@ -3,7 +3,8 @@
 #include "LogoScene.h"
 
 
-Scene* LogoScene::createScene(){
+Scene* LogoScene::createScene()
+{
 	
 	auto scene = Scene::create();
 
@@ -16,37 +17,81 @@ Scene* LogoScene::createScene(){
 
 }
 
-bool LogoScene::init(){
+bool LogoScene::init()
+{
 
-	if (!Layer::init()){
+	if (!Layer::init())
+	{
 		return false;
 	}
 
-	loadRes();
+	addLogo();
+
 	return true;
 }
 
-void  LogoScene::loadRes(){
+void LogoScene::addLogo()
+{
+	
+	Size visibleSize      = Director::getInstance()->getVisibleSize();
+	Point originPoint     = Director::getInstance()->getVisibleOrigin();
+
+	auto logo = Sprite::create(JsonReader::getInstance()->getPathFromJson("logo"));
+	logo->setPosition(Point(originPoint.x + visibleSize.width / 2, originPoint.y + visibleSize.height / 2));
+	logo->setName("logo");
+	logo->setOpacity(10);
+	this->addChild(logo);
+	logo->runAction(Sequence::create(FadeTo::create(2.0f, 255), CallFunc::create(CC_CALLBACK_0(LogoScene::loadRes,this)),nullptr));
+}
+
+void  LogoScene::loadRes()
+{
 
 	//Sprite* Sprite::create(const std::string& filename)
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Point origin     = Director::getInstance()->getVisibleOrigin();
+	//void TextureCache::addImageAsync(const std::string &path, const std::function<void(Texture2D*)>& callback)
+	Director::getInstance()->getTextureCache()->addImageAsync("tappyplane.png", CC_CALLBACK_1(LogoScene::loadImageOver, this));
 
-	std::string name = JsonReader::getInstance()->getPathFromJson("logo");
-
-
-
-	auto logo = Sprite::create(name);
-	logo->setPosition(Point(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
-	this->addChild(logo);
-
-	//auto laa = Label::createWithTTF(name, "fonts/Marker Felt.ttf", 24);
-
-	//								// position the label on the center of the screen
-	//laa->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 5));
-
-	//								// add the label as a child to this layer
-	//this->addChild(laa);
 }
 
 
+void LogoScene::loadImageOver(Texture2D* texture)
+{
+
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("tappyplane.plist", texture);
+
+	this->loadMusic();
+
+	this->startGame();
+}
+
+void LogoScene::loadMusic()
+{
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("MonkeyIslandBand.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("pop1.ogg");
+
+}
+
+void LogoScene::startGame()
+{
+
+	// CallFunc::create(std::bind(&BulletinBoard::fadeinPanel, this));
+	CallFunc* nextScene = CallFunc::create(std::bind(&LogoScene::nextScene, this));
+	this->getChildByName("logo")->runAction(Sequence::create(FadeOut::create(2.0f), nextScene, nullptr));
+}
+
+
+void LogoScene::nextScene()
+{
+
+	
+	GameController::getInstance()->goState(GAME_STATE::MENU);
+
+}
+
+void LogoScene::onExit()
+{
+
+	Layer::onExit();
+	this->stopAllActions();
+
+}

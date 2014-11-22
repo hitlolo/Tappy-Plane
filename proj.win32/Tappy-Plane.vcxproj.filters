@@ -22,6 +22,15 @@
     <Filter Include="classes\Helper">
       <UniqueIdentifier>{6cb9248e-e381-4eb7-8f56-e64674a7ab15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="classes\Action">
+      <UniqueIdentifier>{a6a3e83a-0764-483f-850d-73a0abacd694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="classes\Menu">
+      <UniqueIdentifier>{292b5a36-c800-49f5-a4fb-f0457b4a8b9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="classes\Elements">
+      <UniqueIdentifier>{d45d6ada-8e3e-424d-b545-571b761f1ffd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +48,39 @@
     <ClCompile Include="..\Classes\JsonReader.cpp">
       <Filter>classes\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>classes\Gameing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackGroundLayer.cpp">
+      <Filter>classes\Gameing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ActionEllipse.cpp">
+      <Filter>classes\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ActionRotation.cpp">
+      <Filter>classes\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BulletinBoard.cpp">
+      <Filter>classes\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlaneSprite.cpp">
+      <Filter>classes\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ActionSineCurve.cpp">
+      <Filter>classes\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Stratosphere.cpp">
+      <Filter>classes\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MenuScene.cpp">
+      <Filter>classes\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameController.cpp">
+      <Filter>classes\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TouchLayer.cpp">
+      <Filter>classes\Gameing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -55,6 +97,48 @@
     </ClInclude>
     <ClInclude Include="..\Classes\JsonReader.h">
       <Filter>classes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>classes\Gameing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackGroundLayer.h">
+      <Filter>classes\Gameing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ActionEllipse.h">
+      <Filter>classes\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ActionRotation.h">
+      <Filter>classes\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BulletinDelegate.h">
+      <Filter>classes\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BulletinBoard.h">
+      <Filter>classes\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlaneSprite.h">
+      <Filter>classes\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ActionSineCurve.h">
+      <Filter>classes\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Stratosphere.h">
+      <Filter>classes\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MenuScene.h">
+      <Filter>classes\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data.h">
+      <Filter>classes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameController.h">
+      <Filter>classes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TouchDelegate.h">
+      <Filter>classes\Gameing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TouchLayer.h">
+      <Filter>classes\Gameing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
