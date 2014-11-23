@@ -23,6 +23,8 @@ public:
 
 	CC_SYNTHESIZE(PlaneSprite*, planeSprite, PlaneSprite);
 
+	CC_SYNTHESIZE(GAME_STATE, curGameState, CurGameState);
+
 private:
 
 	Point originPoint;
@@ -62,7 +64,6 @@ private:
 
 	virtual void update(float dt) override;
 
-	CC_SYNTHESIZE(GAME_STATE, curGameState, CurGameState);
 	//plane
 	void    addPlane();
 	//puff

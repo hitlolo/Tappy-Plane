@@ -3,8 +3,13 @@
 USING_NS_CC;
 
 
+
+#define GRAVITY              Point(0,-980)
+#define VELOCITY			 Point(0,260)	
+
 typedef enum class state_enum{
 	STATE_IDEL = 0,
+	STATE_READY,
 	STATE_GAME,
 	STATE_CRASH
 }PLANE_STATE;

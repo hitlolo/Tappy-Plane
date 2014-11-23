@@ -202,6 +202,8 @@ void Stratosphere::update(float dt)
 		break;
 	case GAME_STATE::OVER:
 		break;
+	default:
+		break;
 	}
 	
 
@@ -247,7 +249,7 @@ void  Stratosphere::runByState(GAME_STATE state)
 	case GAME_STATE::READY:
 		this->startScrolling();
 		this->schedule(CC_SCHEDULE_SELECTOR(Stratosphere::createPuff), 0.2f);
-		this->getPlaneSprite()->runByState(PLANE_STATE::STATE_GAME);
+		this->getPlaneSprite()->runByState(PLANE_STATE::STATE_READY);
 		break;
 	case GAME_STATE::GAMING:
 		this->getPlaneSprite()->runByState(PLANE_STATE::STATE_GAME);

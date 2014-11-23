@@ -26,7 +26,13 @@
         "tap_tag_right":"tapRight.png",
         "tap_tag_left":"tapLeft.png",
         "puff1":"puffLarge.png",
-        "puff2":"puffSmall.png"
+        "puff2":"puffSmall.png",
+        "land_grass":"groundGrass.png",
+        "land_dirt":"groundDirt.png",
+        "land_rock":"groundRock.png",
+        "land_snow":"groundSnow.png",
+        "land_ice":"groundIce.png",
+        "land_shape":"groundShape.plist"
 
 
 }

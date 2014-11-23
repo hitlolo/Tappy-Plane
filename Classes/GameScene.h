@@ -30,8 +30,8 @@ private:
 
 	
 	void addGameLayers();
-
-	BackGroundLayer  *backLayer;
+	//³¬Ç°ÒıÓÃ
+	class BackGroundLayer  *backLayer;
 
 	Stratosphere     *stratoLayer;
 

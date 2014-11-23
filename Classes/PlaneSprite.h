@@ -6,6 +6,7 @@
 #include "ActionRotation.h"
 #include "JsonReader.h"
 #include "Data.h"
+#include "ShapeCacher.h"
 
 USING_NS_CC;
 
@@ -20,9 +21,13 @@ public:
 
 	virtual bool init() override;
 
+	virtual void update(float time) override;
+
 	CC_SYNTHESIZE(PLANE_STATE, curState, CurState);
 
 	void runByState(PLANE_STATE);
+
+	void flyUp();
 private:
 
 	Point originPoint;
@@ -50,6 +55,8 @@ private:
 	void initActions();
 
 	void idle();
+	
+	void ready();
 
 	void gaming();
 

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+    <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>1</integer>
+        </dict>
+        <key>bodies</key>
+		<dict>
+
+			<key>groundDirt</key>
+			<dict>
+				<key>anchorpoint</key>
+                <string>{ 0.50000,0.50000 }</string>
+                <key>fixtures</key>
+                <array>
+
+					<dict>
+                        <key>mass</key>
+                        <real>2</real>
+                        <key>elasticity</key>
+                        <real>0</real>
+                        <key>friction</key>
+                        <real>0</real>
+                        <key>surface_velocity</key>
+                        <string>{ 0.00000,0.00000 }</string>
+                        <key>layers</key>
+                        <integer>0</integer>
+                        <key>group</key>
+                        <integer>0</integer>
+                        <key>collision_type</key>
+                        <integer>0</integer>
+                        <key>isSensor</key>
+                        <false/>
+                        <key>fixture_type</key>
+                        <key>POLYGON</key>
+                        
+						<key>polygons</key>
+						<array>
+							<array>	
+								<string>{ -370.00000,2.50000 }</string>	
+								<string>{ -363.00000,-5.50000 }</string>	
+								<string>{ -404.00000,-35.50000 }</string>	
+								<string>{ -404.00000,0.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 404.00000,-35.50000 }</string>	
+								<string>{ 369.00000,7.50000 }</string>	
+								<string>{ 404.00000,0.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 232.00000,12.50000 }</string>	
+								<string>{ 168.00000,-18.50000 }</string>	
+								<string>{ 193.00000,8.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 350.00000,22.50000 }</string>	
+								<string>{ 168.00000,-18.50000 }</string>	
+								<string>{ 347.00000,26.50000 }</string>	
+								<string>{ 350.00000,24.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 360.00000,9.50000 }</string>	
+								<string>{ 168.00000,-18.50000 }</string>	
+								<string>{ 357.00000,13.50000 }</string>	
+								<string>{ 360.00000,11.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 67.00000,-8.50000 }</string>	
+								<string>{ -55.00000,8.50000 }</string>	
+								<string>{ -32.00000,23.50000 }</string>	
+								<string>{ 34.00000,23.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 347.00000,28.50000 }</string>	
+								<string>{ 347.00000,26.50000 }</string>	
+								<string>{ 168.00000,-18.50000 }</string>	
+								<string>{ 232.00000,12.50000 }</string>	
+								<string>{ 318.00000,35.50000 }</string>	
+								<string>{ 341.00000,35.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 369.00000,7.50000 }</string>	
+								<string>{ 404.00000,-35.50000 }</string>	
+								<string>{ 168.00000,-18.50000 }</string>	
+								<string>{ 360.00000,9.50000 }</string>	
+								<string>{ 365.00000,9.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 318.00000,35.50000 }</string>	
+								<string>{ 232.00000,12.50000 }</string>	
+								<string>{ 253.00000,32.50000 }</string>
+							</array>
+							<array>	
+								<string>{ -153.00000,31.50000 }</string>	
+								<string>{ -148.00000,28.50000 }</string>	
+								<string>{ -270.00000,2.50000 }</string>	
+								<string>{ -248.00000,28.50000 }</string>
+							</array>
+							<array>	
+								<string>{ -310.00000,-8.50000 }</string>	
+								<string>{ -404.00000,-35.50000 }</string>	
+								<string>{ -363.00000,-5.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 129.00000,-18.50000 }</string>	
+								<string>{ -310.00000,-8.50000 }</string>	
+								<string>{ 107.00000,-8.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 357.00000,13.50000 }</string>	
+								<string>{ 168.00000,-18.50000 }</string>	
+								<string>{ 350.00000,22.50000 }</string>	
+								<string>{ 357.00000,15.50000 }</string>
+							</array>
+							<array>	
+								<string>{ -135.00000,23.50000 }</string>	
+								<string>{ -270.00000,2.50000 }</string>	
+								<string>{ -148.00000,28.50000 }</string>	
+								<string>{ -137.00000,25.50000 }</string>
+							</array>
+							<array>	
+								<string>{ -122.00000,18.50000 }</string>	
+								<string>{ -270.00000,2.50000 }</string>	
+								<string>{ -135.00000,23.50000 }</string>	
+								<string>{ -124.00000,20.50000 }</string>
+							</array>
+							<array>	
+								<string>{ -109.00000,13.50000 }</string>	
+								<string>{ -270.00000,2.50000 }</string>	
+								<string>{ -122.00000,18.50000 }</string>	
+								<string>{ -111.00000,15.50000 }</string>
+							</array>
+							<array>	
+								<string>{ -96.00000,8.50000 }</string>	
+								<string>{ -270.00000,2.50000 }</string>	
+								<string>{ -109.00000,13.50000 }</string>	
+								<string>{ -98.00000,10.50000 }</string>
+							</array>
+							<array>	
+								<string>{ -310.00000,-8.50000 }</string>	
+								<string>{ 129.00000,-18.50000 }</string>	
+								<string>{ 404.00000,-35.50000 }</string>	
+								<string>{ -404.00000,-35.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 67.00000,-8.50000 }</string>	
+								<string>{ -310.00000,-8.50000 }</string>	
+								<string>{ -307.00000,-6.50000 }</string>	
+								<string>{ -270.00000,2.50000 }</string>	
+								<string>{ -55.00000,8.50000 }</string>
+							</array>
+							<array>	
+								<string>{ 404.00000,-35.50000 }</string>	
+								<string>{ 129.00000,-18.50000 }</string>	
+								<string>{ 168.00000,-18.50000 }</string>
+							</array>
+						</array>
+                        
+					</dict>
+
+				</array>
+			</dict>
+
+		</dict>
+	</dict>
+</plist>
+
+
+
+

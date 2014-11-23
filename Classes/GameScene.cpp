@@ -5,8 +5,17 @@
 
 Scene* GameScene::createScene()
 {
+	//init physics world
+	auto scene = Scene::createWithPhysics();
+	scene->getPhysicsWorld()->setGravity(GRAVITY);
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	auto body = PhysicsBody::createEdgeBox(Size(visibleSize.width, visibleSize.height), PHYSICSBODY_MATERIAL_DEFAULT, 1.0f);
+	auto node = Node::create();
+	node->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2));
+	node->setPhysicsBody(body);
+	scene->addChild(node);
 
-	auto scene = Scene::create();
 	auto game  = GameScene::create();
 	scene->addChild(game,0,"game");
 	return scene;
@@ -68,6 +77,7 @@ void GameScene::runByState(GAME_STATE state)
 		this->bulletinDelegator->showBulletin(READY);
 		break;
 	case GAME_STATE::GAMING:
+		this->stratoLayer->runByState(GAMING);
 		this->bulletinDelegator->showBulletin(GAMING);
 		break;
 	case GAME_STATE::OVER:
@@ -95,8 +105,10 @@ void GameScene::onTouch()
 			GameController::getInstance()->goState(GAMING);
 			break;
 		case GAME_STATE::GAMING:
+			this->stratoLayer->getPlaneSprite()->flyUp();
 			break;
 		case GAME_STATE::OVER:
+			return;
 			break;
 
 	}
