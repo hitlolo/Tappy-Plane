@@ -7,6 +7,7 @@
 #include "Data.h"
 #include "GameController.h"
 #include "ShapeCacher.h"
+#include "RandomCacher.h"
 
 USING_NS_CC;
 
@@ -17,6 +18,14 @@ typedef enum class land_type{
 	ICE,
 	ROCK
 }LAND_TYPE;
+
+typedef enum class rock_type{
+	SINGLE_UP = 0,
+	SINGLE_DOWN,
+	UP_DOWN,
+	TWINS_DOWN,
+	TWINS_UP
+}ROCK_TYPE;
 
 class BackGroundLayer : public Layer{
 
@@ -35,11 +44,41 @@ private:
 
 	Point originPoint;
 
+	std::string rockNameUp;
+	
+	std::string rockNameDown;
+
 	void  addBackGround();
 
-	void  addRocks();
-
 	void  addLand();
+
+	int   getRandomLandType();
+
+	CC_SYNTHESIZE(LAND_TYPE, curLandType, CurLandType);
+
+	Vector<Sprite*> landVector;
+
+	Vector<Node*>   rockVector;
+
+	void  setRockNameAfterLandAdded();
+
+	int   getRandomRockType();
+
+	Node* createRockByType(ROCK_TYPE);
+
+	Node* rockSingleDown();
+
+	Node* rockSingleUp();
+
+	Node* rockUpandDown();
+
+	Node* rockTwinsUp();
+
+	Node* rockTwinsDown();
+
+	void  initRockPhysics(Node*, bool);
+
+	void  addRocks(float);
 
 	void  rockScrolling();
 
@@ -47,13 +86,10 @@ private:
 	
 	void  addElementsByState();
 
-	int   getRandomLand();
+	void  runByState(GAME_STATE);
 
-	CC_SYNTHESIZE(LAND_TYPE, curLandType, CurLandType);
 
-	Vector<Sprite*> landVector;
-
-	void  runByState();
+	~BackGroundLayer();
 
 };
 

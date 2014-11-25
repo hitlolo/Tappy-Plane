@@ -84,6 +84,9 @@
     <ClCompile Include="..\Classes\ShapeCacher.cpp">
       <Filter>classes\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\RandomCacher.cpp">
+      <Filter>classes\Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -144,6 +147,9 @@
       <Filter>classes\Gameing</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ShapeCacher.h">
+      <Filter>classes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RandomCacher.h">
       <Filter>classes\Helper</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,7 +12,7 @@ bool Stratosphere::init()
 	originPoint = Director::getInstance()->getVisibleOrigin();
 	visibleSize = Director::getInstance()->getVisibleSize();
 
-	cloudAcount = 5;  //cloud numbers need to show
+	cloudAcount = RandomCacher::getInstance()->getRandomByRange(5,8);  //cloud numbers need to show
 	
 	this->addClouds();
 	this->addPlane();
@@ -63,14 +63,9 @@ Sprite*  Stratosphere::createCloud()
 
 Point Stratosphere::getRandomPosition()
 {
-	//C++11 new random
-	//std::random_device rd;
-//	std::mt19937 mt(rd());
-//	std::default_random_engine random_e;
-//	std::uniform_int_distribution<int> dist_x(originPoint.x, originPoint.x+visibleSize.width);
-//	std::uniform_int_distribution<int> dist_y(originPoint.y + visibleSize.height / 2, originPoint.y + visibleSize.height);
-	float positionX = this->getRandomByRange(originPoint.x, originPoint.x + visibleSize.width);
-	float positionY = this->getRandomByRange(originPoint.y + visibleSize.height / 2, originPoint.y + visibleSize.height);
+
+	float positionX = RandomCacher::getInstance()->getRandomByRange(originPoint.x, originPoint.x + visibleSize.width);
+	float positionY = RandomCacher::getInstance()->getRandomByRange(originPoint.y + visibleSize.height / 2, originPoint.y + visibleSize.height);
 	Point point = ccp(positionX, positionY);
 #if 0
 	CCLOG("%f:random x,%f:random y******************", point.x, point.y);
@@ -82,56 +77,30 @@ Point Stratosphere::getRandomPosition()
 
 int  Stratosphere::getRandomOpacity()
 {
-	//std::random_device rd;
-	//std::mt19937 mt(rd());
-	////	std::default_random_engine random_e;
-	//std::uniform_int_distribution<int> dist_o(60, 170);
-
-	return getRandomByRange(60,170);
+	return RandomCacher::getInstance()->getRandomByRange(60, 170);
 }
 
 int  Stratosphere::getRandomZorder()
 {
 
-//	std::default_random_engine random_e;
-	//std::random_device rd;
-	//std::mt19937 mt(rd());
-	//std::uniform_int_distribution<int> dist_z(0, 2);
-
-#if 0
-	CCLOG("%d:random zorder", dist_z(mt));
-#endif
-	return getRandomByRange(0, 2);
+	return RandomCacher::getInstance()->getRandomByRange(0, 2);
 
 }
 
 float  Stratosphere::getRandomScale()
 {
-	//std::random_device rd;
-	//std::mt19937 mt(rd());
-	///*std::uniform_int_distribution<int> dist_s(2, 5);
-	//return float(dist_s(mt)/10.0f);*/
-	//std::uniform_real_distribution<float> dist_s(0.2f, 0.5f);
-	return getRandomByRange(0.2f, 0.5f);
+	return RandomCacher::getInstance()->getRandomByRange(0.2f, 0.5f);
 }
 
 float Stratosphere::getRandomSpeed()
 {
-	//std::random_device rd;
-	//std::mt19937 mt(rd());
-	////std::default_random_engine random_e;
-	//std::uniform_int_distribution<> dist_s(4, 15);
-	
-#if 0
-	CCLOG("%d:random speed", dist_s(mt));
-#endif
-	return getRandomByRange(0.4f, 1.5f);
+	return RandomCacher::getInstance()->getRandomByRange(0.4f, 1.5f);
 }
 
 
 float  Stratosphere::getRandomRotation()
 {
-	int rotation = getRandomByRange(0, 1);
+	int rotation = RandomCacher::getInstance()->getRandomByRange(0, 1);
 	switch (rotation){
 	case 0:
 		return 0.0f;
@@ -163,23 +132,6 @@ void  Stratosphere::cloudScroll()
 		}
 
 	}
-}
-
-int Stratosphere::getRandomByRange(int from, int to)
-{
-	
-	std::mt19937 mt(rd());
-	//std::default_random_engine random_e;
-	std::uniform_int_distribution<int> dist(from, to);
-	return dist(mt);
-}
-
-float Stratosphere::getRandomByRange(float from, float to)
-{
-	std::mt19937 mt(rd());
-	//std::default_random_engine random_e;
-	std::uniform_real_distribution<float> dist(from, to);
-	return dist(mt);
 }
 
 void Stratosphere::update(float dt)
@@ -281,24 +233,37 @@ void Stratosphere::createPuff(float delta)
 	this->puffVector.pushBack(puffSprite);
 	this->addChild(puffSprite,0);
 	
-
 }
 
 void Stratosphere::puffScrollOut()
 {
 	if (puffVector.empty())
 		return;
+
+	Vector<Sprite*> puffEraseVector;
 	for (auto puff : this->puffVector)
 	{
-		if (!puff->isRunning())
+
+		if (puff->getPositionX() < -puff->getContentSize().width || puff->getOpacity() <= 0)
 		{
-			puffVector.eraseObject(puff);
-			CC_SAFE_RELEASE(puff);
+			puffEraseVector.pushBack(puff);
+			
 		}
 		else
 			puff->setPositionX(puff->getPositionX() - 1.0f);
 	}
 
+	if (puffEraseVector.empty())
+		return;
+	else
+	{
+		for (auto puff : puffEraseVector)
+		{
+			
+			puffVector.eraseObject(puff);
+			this->removeChild(puff);
+		}
+	}
 }
 
 
@@ -313,7 +278,6 @@ void Stratosphere::onExit()
 Stratosphere::~Stratosphere()
 {
 	
-
 	for (auto cloud : this->cloudVector) {
 		float* ptr = (float*)(cloud->getUserData());
 		CC_SAFE_DELETE(ptr);

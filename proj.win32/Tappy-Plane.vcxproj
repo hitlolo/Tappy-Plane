@@ -145,6 +145,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\BulletinBoard.cpp" />
     <ClCompile Include="..\Classes\GameController.cpp" />
     <ClCompile Include="..\Classes\MenuScene.cpp" />
+    <ClCompile Include="..\Classes\RandomCacher.cpp" />
     <ClCompile Include="..\Classes\ShapeCacher.cpp" />
     <ClCompile Include="..\Classes\Stratosphere.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
@@ -166,6 +167,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Data.h" />
     <ClInclude Include="..\Classes\GameController.h" />
     <ClInclude Include="..\Classes\MenuScene.h" />
+    <ClInclude Include="..\Classes\RandomCacher.h" />
     <ClInclude Include="..\Classes\ShapeCacher.h" />
     <ClInclude Include="..\Classes\Stratosphere.h" />
     <ClInclude Include="..\Classes\GameScene.h" />

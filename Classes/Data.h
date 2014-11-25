@@ -6,6 +6,7 @@ USING_NS_CC;
 
 #define GRAVITY              Point(0,-980)
 #define VELOCITY			 Point(0,260)	
+#define THROUGH_PASS         160
 
 typedef enum class state_enum{
 	STATE_IDEL = 0,

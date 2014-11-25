@@ -32,8 +32,14 @@
         "land_rock":"groundRock.png",
         "land_snow":"groundSnow.png",
         "land_ice":"groundIce.png",
-        "land_shape":"groundShape.plist"
-
+        "rock_dirt_up":"rock.png",
+        "rock_dirt_down":"rockDown.png",
+        "rock_grass_up":"rockGrass.png",
+        "rock_grass_down":"rockGrassDown.png",
+        "rock_ice_up":"rockIce.png",
+        "rock_ice_down":"rockIceDown.png",
+        "rock_snow_up":"rockSnow.png",
+        "rock_snow_down":"rockSnowDown.png"
 
 }
 

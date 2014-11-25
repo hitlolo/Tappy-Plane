@@ -97,6 +97,7 @@ void ShapeCacher::addShapesWithDictionary(ValueMap &dictionary, PhysicsBody *bod
 				}
 
 				body->addShape(PhysicsShapePolygon::create(polyVertex, vertexNum));
+				CC_SAFE_DELETE_ARRAY(polyVertex);
 			}
 
 		}

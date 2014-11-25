@@ -32,11 +32,8 @@ void PlaneSprite::createPlane()
 PLANE_COLOR PlaneSprite::getRandomColor()
 {
 	
-	std::random_device rd;
-	std::mt19937 mt(rd());
-	//std::default_random_engine random_e;
-	std::uniform_int_distribution<int> dist_color(0, 3);
-	return (PLANE_COLOR)dist_color(mt);
+	int color = RandomCacher::getInstance()->getRandomByRange(0, 3);
+	return (PLANE_COLOR)color;
 }
 
 void PlaneSprite::initActions()
@@ -100,8 +97,8 @@ Action* PlaneSprite::initEllipseAction()
 {
 	EllipseConfig config;
 	config.center = Point(originPoint.x + visibleSize.width / 2, originPoint.y + visibleSize.height / 10 * 7);
-	config.a = 240;
-	config.b = 120;
+	config.a = RandomCacher::getInstance()->getRandomByRange(200, 300);
+	config.b = RandomCacher::getInstance()->getRandomByRange(70, 120);
 	config.angle = CC_DEGREES_TO_RADIANS(-45);
 	config.isAnticlockwise = false;
 	config.zOrder = std::make_pair(1, 3);
@@ -124,7 +121,6 @@ Action* PlaneSprite::initSwingAction()
 
 void PlaneSprite::initPhysicsAttributes()
 {
-
 
 	PhysicsBody *body = PhysicsBody::create();
 	ShapeCacher::getInstance()->addShapesWithFile("planeShape.plist", body);

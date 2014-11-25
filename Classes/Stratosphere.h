@@ -5,6 +5,7 @@
 #include "JsonReader.h"
 #include <random>
 #include "PlaneSprite.h"
+#include "RandomCacher.h"
 
 
 USING_NS_CC;
@@ -54,13 +55,6 @@ private:
 	void    cloudScroll();
 
 	void    stopScrolling();
-
-	//c++11 random
-	std::random_device rd;
-
-	int     getRandomByRange(int, int);
-
-	float   getRandomByRange(float, float);
 
 	virtual void update(float dt) override;
 

@@ -7,6 +7,7 @@
 #include "JsonReader.h"
 #include "Data.h"
 #include "ShapeCacher.h"
+#include "RandomCacher.h"
 
 USING_NS_CC;
 

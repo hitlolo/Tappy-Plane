@@ -8,7 +8,9 @@ Scene* GameScene::createScene()
 	//init physics world
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setGravity(GRAVITY);
+#if 0
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+#endif
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	auto body = PhysicsBody::createEdgeBox(Size(visibleSize.width, visibleSize.height), PHYSICSBODY_MATERIAL_DEFAULT, 1.0f);
 	auto node = Node::create();
@@ -78,6 +80,7 @@ void GameScene::runByState(GAME_STATE state)
 		break;
 	case GAME_STATE::GAMING:
 		this->stratoLayer->runByState(GAMING);
+		this->backLayer->runByState(GAMING);
 		this->bulletinDelegator->showBulletin(GAMING);
 		break;
 	case GAME_STATE::OVER:

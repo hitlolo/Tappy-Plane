@@ -7,6 +7,7 @@
 #include "BulletinBoard.h"
 
 
+
 USING_NS_CC;
 
 class MenuScene :public Layer{
