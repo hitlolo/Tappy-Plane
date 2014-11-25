@@ -8,6 +8,7 @@
 #include "GameController.h"
 #include "ShapeCacher.h"
 #include "RandomCacher.h"
+#include "CoinLayer.h"
 
 USING_NS_CC;
 
@@ -88,7 +89,11 @@ private:
 
 	void  runByState(GAME_STATE);
 
+	void  getPoint();
 
+	bool  isGetPoint(Node*);
+
+	void  addCoinLayer();
 	~BackGroundLayer();
 
 };

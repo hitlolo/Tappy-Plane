@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="starGold" tilewidth="39" tileheight="38">
+  <tile id="0">
+   <image width="39" height="38" source="starGold.png"/>
+  </tile>
+ </tileset>
+ <objectgroup name="stars">
+  <object gid="1" x="302.747" y="236.306" rotation="15"/>
+  <object gid="1" x="262" y="242"/>
+  <object gid="1" x="363" y="244"/>
+  <object gid="1" x="414" y="243"/>
+  <object gid="1" x="462" y="243"/>
+  <object gid="1" x="298" y="178"/>
+  <object gid="1" x="361" y="179"/>
+  <object gid="1" x="420" y="180"/>
+  <object gid="1" x="299" y="302"/>
+  <object gid="1" x="419" y="304"/>
+  <object gid="1" x="198" y="244"/>
+  <object gid="1" x="146" y="241"/>
+  <object gid="1" x="512" y="240"/>
+  <object gid="1" x="574" y="238"/>
+ </objectgroup>
+</map>

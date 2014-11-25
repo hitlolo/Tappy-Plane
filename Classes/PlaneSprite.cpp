@@ -154,7 +154,7 @@ void PlaneSprite::ready()
 	this->setZOrder(1);  //make plane can cover by  clouds randomly.
 	this->runAction(this->actionIdle);
 	this->runAction(this->actionSwing);
-	this->setPosition(originPoint.x + visibleSize.width / 4, originPoint.y + visibleSize.height / 2);
+	this->setPosition(originPoint.x + visibleSize.width / 3, originPoint.y + visibleSize.height / 2);
 	this->getPhysicsBody()->setGravityEnable(false);	
 }
 
@@ -206,4 +206,5 @@ void PlaneSprite::update(float time)
 void PlaneSprite::flyUp()
 {
 	this->getPhysicsBody()->setVelocity(VELOCITY);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_wing.ogg");
 }

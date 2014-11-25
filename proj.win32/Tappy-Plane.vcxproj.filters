@@ -87,6 +87,9 @@
     <ClCompile Include="..\Classes\RandomCacher.cpp">
       <Filter>classes\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CoinLayer.cpp">
+      <Filter>classes\Gameing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\RandomCacher.h">
       <Filter>classes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CoinLayer.h">
+      <Filter>classes\Gameing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

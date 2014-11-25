@@ -38,6 +38,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	paths.push_back("fonts");
 	paths.push_back("image");
 	paths.push_back("sounds");
+	paths.push_back("map");
 	FileUtils::getInstance()->setSearchPaths(paths);
 
     auto director = Director::getInstance();

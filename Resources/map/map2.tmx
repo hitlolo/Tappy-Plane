@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="starGold" tilewidth="39" tileheight="38">
+  <tile id="0">
+   <image width="39" height="38" source="starGold.png"/>
+  </tile>
+ </tileset>
+ <objectgroup name="stars">
+  <object gid="1" x="182" y="66"/>
+  <object gid="1" x="154" y="108"/>
+  <object gid="1" x="124" y="155"/>
+  <object gid="1" x="86" y="214"/>
+  <object gid="1" x="115" y="251"/>
+  <object gid="1" x="155" y="287"/>
+  <object gid="1" x="203" y="318"/>
+  <object gid="1" x="240" y="342"/>
+  <object gid="1" x="271" y="309"/>
+  <object gid="1" x="312" y="263"/>
+  <object gid="1" x="335" y="226"/>
+  <object gid="1" x="351" y="195"/>
+  <object gid="1" x="315" y="162"/>
+  <object gid="1" x="260" y="129"/>
+  <object gid="1" x="218" y="96"/>
+  <object gid="1" x="389" y="187"/>
+  <object gid="1" x="423" y="155"/>
+  <object gid="1" x="464" y="122"/>
+  <object gid="1" x="502" y="91"/>
+  <object gid="1" x="535" y="71"/>
+  <object gid="1" x="582" y="107"/>
+  <object gid="1" x="612" y="139"/>
+  <object gid="1" x="660" y="181"/>
+  <object gid="1" x="684" y="234"/>
+  <object gid="1" x="640" y="293"/>
+  <object gid="1" x="584" y="335"/>
+  <object gid="1" x="534" y="366"/>
+  <object gid="1" x="461" y="344"/>
+  <object gid="1" x="428" y="298"/>
+  <object gid="1" x="398" y="250"/>
+ </objectgroup>
+</map>

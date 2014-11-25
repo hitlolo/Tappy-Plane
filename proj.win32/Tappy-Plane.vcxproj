@@ -143,6 +143,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BackGroundLayer.cpp" />
     <ClCompile Include="..\Classes\BulletinBoard.cpp" />
+    <ClCompile Include="..\Classes\CoinLayer.cpp" />
     <ClCompile Include="..\Classes\GameController.cpp" />
     <ClCompile Include="..\Classes\MenuScene.cpp" />
     <ClCompile Include="..\Classes\RandomCacher.cpp" />
@@ -164,6 +165,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\BackGroundLayer.h" />
     <ClInclude Include="..\Classes\BulletinBoard.h" />
     <ClInclude Include="..\Classes\BulletinDelegate.h" />
+    <ClInclude Include="..\Classes\CoinLayer.h" />
     <ClInclude Include="..\Classes\Data.h" />
     <ClInclude Include="..\Classes\GameController.h" />
     <ClInclude Include="..\Classes\MenuScene.h" />

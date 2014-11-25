@@ -15,6 +15,10 @@ bool BulletinBoard::init()
 	visibleSize = Director::getInstance()->getVisibleSize();
 
 	creditView  = nullptr;
+	
+	curStar     = 0;
+
+	curScore    = 0;
 
 	return true;
 
@@ -114,7 +118,7 @@ void BulletinBoard::showStateReady()
 	tutorSprite->addChild(tutorRight);
 	tutorRight->setPosition(-100, 0);
 	tutorLeft->setPosition(100, 0);
-	tutorSprite->setPosition(originPoint.x + visibleSize.width / 4, originPoint.y + visibleSize.height / 2);
+	tutorSprite->setPosition(originPoint.x + visibleSize.width / 3, originPoint.y + visibleSize.height / 2);
 	this->addChild(tutorSprite);
 	
 	//click hand
@@ -129,7 +133,7 @@ void BulletinBoard::showStateReady()
 
 	tapSprite = Sprite::create();
 	// 73 is the height of the plane contenSize
-	tapSprite->setPosition(originPoint.x + visibleSize.width / 4 + 30, originPoint.y + visibleSize.height / 2 - 73);
+	tapSprite->setPosition(originPoint.x + visibleSize.width / 3 + 30, originPoint.y + visibleSize.height / 2 - 73);
 
 	Animate*        blink_ = Animate::create(tapAnimation);
 	tapSprite->runAction(RepeatForever::create(blink_));
@@ -154,11 +158,41 @@ void BulletinBoard::readyToGame(const std::function<void(void)> &callback)
 
 void BulletinBoard::showStateGaming()
 {
+	std::string file_name = JsonReader::getInstance()->getPathFromJson("font"); 
+	this->scoreLabel = Label::createWithBMFont(file_name,"0");
+	scoreLabel->setPosition(originPoint.x + visibleSize.width / 2, originPoint.y + visibleSize.height / 10 * 8);
+	this->addChild(scoreLabel);
+
+
+	file_name = JsonReader::getInstance()->getPathFromJson("star_gold");
+	this->starSprite = Sprite::createWithSpriteFrameName(file_name);
+	file_name = JsonReader::getInstance()->getPathFromJson("font_ttf");
+	this->starLabel = Label::createWithTTF("0", file_name, 50, Size::ZERO, TextHAlignment::CENTER, TextVAlignment::CENTER);
+	starLabel->enableOutline(Color4B(245, 178, 33, 155), 2);
+	auto starNode = Node::create(); 
+	this->starSprite->setAnchorPoint(Point(0, 1));
+	this->starLabel->setAnchorPoint(Point(0, 0.5));
+	starNode->setAnchorPoint(Point(0, 1));
+	starLabel->setPosition(starSprite->getContentSize().width + 10, -starSprite->getContentSize().height/2 );
+
+	starNode->addChild(starSprite);
+	starNode->addChild(starLabel);
+	starNode->setPosition(10,originPoint.y + visibleSize.height - 10);
+	this->addChild(starNode);
 
 }
 
-void  BulletinBoard::updateStarAcount()
+void  BulletinBoard::updateStarAcount(int star)
 {
+
+}
+
+void BulletinBoard::updateScore()
+{	
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_point.ogg");
+	this->setCurScore(this->getCurScore() + 1);
+	auto str = String::createWithFormat("%d", getCurScore());
+	scoreLabel->setString(str->getCString());
 
 }
 

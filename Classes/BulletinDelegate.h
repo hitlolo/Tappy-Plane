@@ -8,7 +8,9 @@ public:
 	
 	virtual void showBulletin(GAME_STATE) = 0;
 
-	virtual void updateStarAcount() = 0;
+	virtual void updateStarAcount(int) = 0;
+
+	virtual void updateScore() = 0;
 
 protected:
 

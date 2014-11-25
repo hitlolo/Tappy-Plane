@@ -35,10 +35,12 @@ void GameController::goState(GAME_STATE state)
 	case GAME_STATE::LOGO:
 		break;
 	case GAME_STATE::MENU:
+		this->playSceneSwitchEffect();
 		scene = MenuScene::createScene();
 		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("MonkeyIslandBand.mp3", true);
 		break;
 	case GAME_STATE::READY:
+		this->playSceneSwitchEffect();
 		scene = GameScene::createScene();
 		break;
 	case GAME_STATE::GAMING:
@@ -53,6 +55,15 @@ void GameController::goState(GAME_STATE state)
 		}		
 		break;
 	case GAME_STATE::OVER:
+		{
+			scene = this->getCurScene();
+			if (scene)
+			{
+				auto game_layer = dynamic_cast<GameScene*>(scene->getChildByName("game"));
+				game_layer->runByState(OVER);
+				return;
+			}
+		}
 		break;
 	
 	}
@@ -60,9 +71,27 @@ void GameController::goState(GAME_STATE state)
 	this->nextScene(scene);
 }
 
+
+void GameController::getPoint()
+{
+	auto scene = this->getCurScene();
+	if (scene)
+	{
+		auto game_layer = dynamic_cast<GameScene*>(scene->getChildByName("game"));
+		game_layer->updateScore();
+		return;
+	}
+}
+
 void GameController::nextScene(Scene* scene)
 {
 	TransitionScene *transition = TransitionFade::create(0.3f, scene);
 	// run
 	Director::getInstance()->replaceScene(transition);
+}
+
+
+void GameController::playSceneSwitchEffect()
+{
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_swooshing.ogg");
 }

@@ -71,19 +71,20 @@ void GameScene::runByState(GAME_STATE state)
 
 	switch (state)
 	{
+	case GAME_STATE::LOGO:
+
+			break;
 	case GAME_STATE::MENU:
 
 		break;
 	case GAME_STATE::READY:
-		this->stratoLayer->runByState(READY);
-		this->bulletinDelegator->showBulletin(READY);
+		readyGame();
 		break;
 	case GAME_STATE::GAMING:
-		this->stratoLayer->runByState(GAMING);
-		this->backLayer->runByState(GAMING);
-		this->bulletinDelegator->showBulletin(GAMING);
+		startGame();
 		break;
 	case GAME_STATE::OVER:
+		overGame();
 		break;
 
 	}
@@ -116,4 +117,60 @@ void GameScene::onTouch()
 
 	}
 
+}
+
+
+void GameScene::updateScore()
+{
+	this->bulletinDelegator->updateScore(); 
+
+}
+
+
+void GameScene::addPhysicsContactListener()
+{
+	auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContact, this);
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
+}
+
+bool  GameScene::onContact(PhysicsContact& contact){
+
+	if (GameController::getInstance()->getCurState() == GAME_STATE::GAMING)
+	{
+		if ((COLLIDER_TYPE)contact.getType() == (COLLIDER_TYPE_LAND | COLLIDER_TYPE_ROCK))
+		{
+			GameController::getInstance()->goState(GAME_STATE::OVER);
+
+		}
+	
+	}
+	
+	return true;
+}
+
+
+void GameScene::readyGame()
+{
+	this->stratoLayer->runByState(READY);
+	this->bulletinDelegator->showBulletin(READY);
+
+}
+
+void GameScene::startGame()
+{
+
+	this->stratoLayer->runByState(GAMING);
+	this->backLayer->runByState(GAMING);
+	this->bulletinDelegator->showBulletin(GAMING);
+	this->addPhysicsContactListener();
+}
+
+void GameScene::overGame()
+{
+	
+	this->stratoLayer->runByState(OVER);
+	this->backLayer->runByState(OVER);
+	this->bulletinDelegator->showBulletin(OVER);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_die.ogg");
 }

@@ -8,6 +8,7 @@
 #include "Data.h"
 #include "ShapeCacher.h"
 #include "RandomCacher.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 

@@ -5,6 +5,7 @@
 #include "MenuScene.h"
 #include "GameScene.h"
 #include "Data.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -16,7 +17,7 @@ public:
 	
 	void goState(GAME_STATE);
 
-	
+	void getPoint(); 
 
 private:
 
@@ -30,6 +31,7 @@ private:
 
 	void nextScene(Scene*);
 
+	void playSceneSwitchEffect();
 };
 
 

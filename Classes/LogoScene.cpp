@@ -69,6 +69,10 @@ void LogoScene::loadMusic()
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("MonkeyIslandBand.mp3");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("pop1.ogg");
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sfx_point.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sfx_die.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sfx_swooshing.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sfx_wing.ogg");
 }
 
 void LogoScene::startGame()

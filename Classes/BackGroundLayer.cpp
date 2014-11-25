@@ -33,6 +33,7 @@ void BackGroundLayer::addElementsByState()
 	case GAME_STATE::GAMING:
 		this->addBackGround();
 		this->addLand();
+		this->addCoinLayer();
 		this->scheduleUpdate();
 		break;
 	default:
@@ -313,9 +314,16 @@ void BackGroundLayer::addRocks(float time)
 	ROCK_TYPE type = static_cast<ROCK_TYPE>(this->getRandomRockType());
 
 	auto rock = this->createRockByType(type);
+	rock->setTag(1);
 	this->rockVector.pushBack(rock);
 	this->addChild(rock,2);
 
+}
+
+void BackGroundLayer::addCoinLayer()
+{
+	auto coinLayer = CoinLayer::create();
+	this->addChild(coinLayer);
 }
 
 void BackGroundLayer::landScrolling()
@@ -344,6 +352,13 @@ void BackGroundLayer::rockScrolling()
 		float position_x = rock->getPositionX();
 		rock->setPositionX(rock->getPositionX() - 1.8f);
 
+		if (isGetPoint(rock) && (rock->getTag() == 1))
+		{
+			CCLOG("%f,%f", position_x, CHECK_POINT);
+			rock->setTag(0);
+			this->getPoint();
+		}
+
 		if (position_x < -(rock->getContentSize().width /2))
 		{
 			rockEraser.pushBack(rock);
@@ -358,11 +373,22 @@ void BackGroundLayer::rockScrolling()
 	{
 		for (auto rock : rockEraser)
 		{
-			CCLOG("%f,!!!%f,%f!", rock->getPositionX(), rock->getContentSize().width, rock->getContentSize().height);
+			
 			rockVector.eraseObject(rock);
 			this->removeChild(rock);
 		}
 	}
+}
+
+
+bool BackGroundLayer::isGetPoint(Node* pipe)
+{
+	return pipe->getPositionX() < CHECK_POINT;
+}
+
+void   BackGroundLayer::getPoint()
+{
+	GameController::getInstance()->getPoint();
 }
 
 void  BackGroundLayer::update(float time)

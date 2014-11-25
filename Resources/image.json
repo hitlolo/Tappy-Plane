@@ -4,7 +4,7 @@
         "background":"background.png",
         "cloud":"SingleCloud.png",
         "font":"plane-font.fnt",
-        "font_ttf":"kenvector_future.ttf",
+        "font_ttf":"kenvector_future_thin.ttf",
         "button_play":"buttonLarge.png",
         "button_credits":"buttonCredits.png",
         "plane_blue_1":"planeBlue1.png",
@@ -39,7 +39,8 @@
         "rock_ice_up":"rockIce.png",
         "rock_ice_down":"rockIceDown.png",
         "rock_snow_up":"rockSnow.png",
-        "rock_snow_down":"rockSnowDown.png"
+        "rock_snow_down":"rockSnowDown.png",
+        "star_gold":"starGold.png"
 
 }
 

@@ -7,6 +7,7 @@ USING_NS_CC;
 #define GRAVITY              Point(0,-980)
 #define VELOCITY			 Point(0,260)	
 #define THROUGH_PASS         160
+#define CHECK_POINT          originPoint.x + visibleSize.width / 3
 
 typedef enum class state_enum{
 	STATE_IDEL = 0,
@@ -34,6 +35,7 @@ typedef enum  state{
 typedef enum :uint8_t {
 	COLLIDER_TYPE_PLANE = 0x1,
 	COLLIDER_TYPE_LAND = 0x1 << 1,
-	COLLIDER_TYPE_ROCK = 0x1 << 2
+	COLLIDER_TYPE_ROCK = 0x1 << 2,
+	COLLIDER_TYPE_COIN = 0x1 << 3
 } COLLIDER_TYPE;
 

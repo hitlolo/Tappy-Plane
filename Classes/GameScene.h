@@ -26,10 +26,24 @@ public:
 
 	void runByState(GAME_STATE);
 
+	void updateScore();
+
 private:
 
 	
 	void addGameLayers();
+
+	void addPhysicsContactListener();
+
+	bool onContact(PhysicsContact& contact);
+
+	void readyGame();
+
+	void startGame(); 
+
+	void overGame();
+
+
 	//³¬Ç°ÒýÓÃ
 	class BackGroundLayer  *backLayer;
 

@@ -22,7 +22,9 @@ public:
 
 	virtual void showBulletin(GAME_STATE);
 
-	virtual void updateStarAcount() override;
+	virtual void updateStarAcount(int) override;
+	
+	virtual void updateScore() override;
 
 private:
 
@@ -49,6 +51,16 @@ private:
 
 	//gaming
 	virtual void showStateGaming() override;
+
+	Label*  scoreLabel;
+
+	Sprite* starSprite;
+
+	Label*  starLabel;
+
+	CC_SYNTHESIZE(int, curStar, CurStar);
+
+	CC_SYNTHESIZE(int, curScore, CurScore);
 	//over
 	virtual void showStateOver() override;
 
