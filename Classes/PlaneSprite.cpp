@@ -125,8 +125,8 @@ void PlaneSprite::initPhysicsAttributes()
 	PhysicsBody *body = PhysicsBody::create();
 	ShapeCacher::getInstance()->addShapesWithFile("planeShape.plist", body);
 	body->setCategoryBitmask(COLLIDER_TYPE_PLANE);
-	body->setCollisionBitmask(COLLIDER_TYPE_LAND | COLLIDER_TYPE_ROCK);
-	body->setContactTestBitmask(COLLIDER_TYPE_LAND | COLLIDER_TYPE_ROCK);
+	body->setCollisionBitmask(COLLIDER_TYPE_LAND | COLLIDER_TYPE_ROCK );
+	body->setContactTestBitmask(COLLIDER_TYPE_LAND | COLLIDER_TYPE_ROCK | COLLIDER_TYPE_COIN );
 
 	body->setDynamic(true);
 	body->setLinearDamping(1.0f);

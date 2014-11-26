@@ -9,6 +9,7 @@ USING_NS_CC;
 #define THROUGH_PASS         160
 #define CHECK_POINT          originPoint.x + visibleSize.width / 3
 
+
 typedef enum class state_enum{
 	STATE_IDEL = 0,
 	STATE_READY,

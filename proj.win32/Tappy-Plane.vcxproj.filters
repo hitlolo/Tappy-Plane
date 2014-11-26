@@ -87,7 +87,10 @@
     <ClCompile Include="..\Classes\RandomCacher.cpp">
       <Filter>classes\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CoinLayer.cpp">
+    <ClCompile Include="..\Classes\StarSprite.cpp">
+      <Filter>classes\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StarLayer.cpp">
       <Filter>classes\Gameing</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,7 +158,10 @@
     <ClInclude Include="..\Classes\RandomCacher.h">
       <Filter>classes\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CoinLayer.h">
+    <ClInclude Include="..\Classes\StarSprite.h">
+      <Filter>classes\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StarLayer.h">
       <Filter>classes\Gameing</Filter>
     </ClInclude>
   </ItemGroup>

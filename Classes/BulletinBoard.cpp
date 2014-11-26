@@ -182,13 +182,17 @@ void BulletinBoard::showStateGaming()
 
 }
 
-void  BulletinBoard::updateStarAcount(int star)
+void  BulletinBoard::updateStarAcount()
 {
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("3_Coins.ogg");
+	this->setCurStar(this->getCurStar() + 1);
+	auto str = String::createWithFormat("%d", getCurStar());
+	starLabel->setString(str->getCString());
 }
 
 void BulletinBoard::updateScore()
 {	
+
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_point.ogg");
 	this->setCurScore(this->getCurScore() + 1);
 	auto str = String::createWithFormat("%d", getCurScore());

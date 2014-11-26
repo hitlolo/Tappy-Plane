@@ -6,9 +6,9 @@
   </tile>
  </tileset>
  <objectgroup name="stars">
-  <object gid="1" x="350" y="145"/>
-  <object gid="1" x="186" y="209"/>
-  <object gid="1" x="269" y="208"/>
-  <object gid="1" x="428" y="212"/>
+  <object gid="1" x="96" y="239"/>
+  <object gid="1" x="258" y="239"/>
+  <object gid="1" x="458" y="241"/>
+  <object gid="1" x="664" y="236"/>
  </objectgroup>
 </map>

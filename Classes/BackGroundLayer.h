@@ -8,7 +8,7 @@
 #include "GameController.h"
 #include "ShapeCacher.h"
 #include "RandomCacher.h"
-#include "CoinLayer.h"
+#include "StarLayer.h"
 
 USING_NS_CC;
 
@@ -44,6 +44,8 @@ private:
 	Size  visibleSize;
 
 	Point originPoint;
+
+	StarLayer*  StarLayer;
 
 	std::string rockNameUp;
 	
@@ -93,7 +95,14 @@ private:
 
 	bool  isGetPoint(Node*);
 
-	void  addCoinLayer();
+	void  addStarLayer();
+
+	void  readyGame();
+
+	void  startGame();
+
+	void  overGame();
+
 	~BackGroundLayer();
 
 };

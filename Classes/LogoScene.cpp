@@ -73,6 +73,7 @@ void LogoScene::loadMusic()
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sfx_die.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sfx_swooshing.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("sfx_wing.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("3_Coins.ogg");
 }
 
 void LogoScene::startGame()

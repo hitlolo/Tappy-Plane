@@ -33,7 +33,7 @@ void BackGroundLayer::addElementsByState()
 	case GAME_STATE::GAMING:
 		this->addBackGround();
 		this->addLand();
-		this->addCoinLayer();
+		this->addStarLayer();
 		this->scheduleUpdate();
 		break;
 	default:
@@ -53,14 +53,14 @@ void  BackGroundLayer::runByState(GAME_STATE state)
 		return;
 		break;
 	case GAME_STATE::READY:
-		this->scheduleUpdate();
+		this->readyGame();
 		break;
 	case GAME_STATE::GAMING:
-		this->schedule(CC_SCHEDULE_SELECTOR(BackGroundLayer::addRocks), 3.2f);
+		this->startGame();
+		
 		break;
 	case GAME_STATE::OVER:
-		this->unschedule(CC_SCHEDULE_SELECTOR(BackGroundLayer::addRocks));
-		this->unscheduleUpdate();
+		this->overGame();
 	default:
 		return;
 	}
@@ -314,16 +314,15 @@ void BackGroundLayer::addRocks(float time)
 	ROCK_TYPE type = static_cast<ROCK_TYPE>(this->getRandomRockType());
 
 	auto rock = this->createRockByType(type);
-	rock->setTag(1);
 	this->rockVector.pushBack(rock);
-	this->addChild(rock,2);
+	this->addChild(rock,2,1);
 
 }
 
-void BackGroundLayer::addCoinLayer()
+void BackGroundLayer::addStarLayer()
 {
-	auto coinLayer = CoinLayer::create();
-	this->addChild(coinLayer);
+	StarLayer = StarLayer::create();
+	this->addChild(StarLayer);
 }
 
 void BackGroundLayer::landScrolling()
@@ -354,7 +353,6 @@ void BackGroundLayer::rockScrolling()
 
 		if (isGetPoint(rock) && (rock->getTag() == 1))
 		{
-			CCLOG("%f,%f", position_x, CHECK_POINT);
 			rock->setTag(0);
 			this->getPoint();
 		}
@@ -412,6 +410,25 @@ void  BackGroundLayer::update(float time)
 		break;
 	}
 
+}
+
+
+void  BackGroundLayer::readyGame()
+{
+	this->scheduleUpdate();
+}
+
+void  BackGroundLayer::startGame()
+{
+	this->schedule(CC_SCHEDULE_SELECTOR(BackGroundLayer::addRocks), 3.2f);
+	this->StarLayer->startGame();
+}
+
+void  BackGroundLayer::overGame()
+{
+	this->unschedule(CC_SCHEDULE_SELECTOR(BackGroundLayer::addRocks));
+	this->unscheduleUpdate();
+	this->StarLayer->overGame();
 }
 
 BackGroundLayer::~BackGroundLayer()

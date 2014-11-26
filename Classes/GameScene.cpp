@@ -31,6 +31,9 @@ bool GameScene::init()
 		return false;
 	}
 
+	visibleSize = Director::getInstance()->getVisibleSize();
+	originPoint = Director::getInstance()->getVisibleOrigin();
+
 	this->addGameLayers();
 	this->runByState(GAME_STATE::READY);
 
@@ -42,10 +45,6 @@ bool GameScene::init()
 
 void GameScene::addGameLayers()
 {
-
-	Size visibleSize  = Director::getInstance()->getVisibleSize();
-	Point originPoint = Director::getInstance()->getVisibleOrigin();
-
 
 	this->backLayer = BackGroundLayer::create();
 	this->addChild(backLayer);
@@ -126,6 +125,10 @@ void GameScene::updateScore()
 
 }
 
+void GameScene::updateStarAcount()
+{
+	this->bulletinDelegator->updateStarAcount();
+}
 
 void GameScene::addPhysicsContactListener()
 {
@@ -138,11 +141,37 @@ bool  GameScene::onContact(PhysicsContact& contact){
 
 	if (GameController::getInstance()->getCurState() == GAME_STATE::GAMING)
 	{
-		if ((COLLIDER_TYPE)contact.getType() == (COLLIDER_TYPE_LAND | COLLIDER_TYPE_ROCK))
-		{
-			GameController::getInstance()->goState(GAME_STATE::OVER);
+		 auto objectA = contact.getShapeA()->getCategoryBitmask();
+		 auto objectB = contact.getShapeB()->getCategoryBitmask();
 
-		}
+		 if (   (objectA | objectB) == (COLLIDER_TYPE_PLANE | COLLIDER_TYPE_LAND) 
+			 || (objectA | objectB) == (COLLIDER_TYPE_PLANE | COLLIDER_TYPE_ROCK)
+			 )
+		 {
+			GameController::getInstance()->goState(GAME_STATE::OVER);
+		 }
+		 if ((objectA | objectB) == (COLLIDER_TYPE_PLANE | COLLIDER_TYPE_COIN))
+		 {
+			 if (objectA == COLLIDER_TYPE_COIN)
+			 {
+				 auto node = contact.getShapeA()->getBody()->getNode();
+				 if (node->getTag() == 0)
+				 {
+					 static_cast<StarSprite*>(node)->runStarAction();
+					 this->updateStarAcount();
+				 }
+				
+			 }
+			 else
+			 {
+				 auto node = contact.getShapeB()->getBody()->getNode();
+				 if (node->getTag() == 0)
+				 {
+					 static_cast<StarSprite*>(node)->runStarAction();
+					 this->updateStarAcount();
+				 }
+			 }
+		 }
 	
 	}
 	

@@ -9,6 +9,7 @@
 #include "Stratosphere.h"
 #include "BulletinBoard.h"
 #include "TouchLayer.h"
+#include "StarSprite.h"
 
 USING_NS_CC;
 
@@ -28,8 +29,12 @@ public:
 
 	void updateScore();
 
-private:
+	
 
+private:
+	Size  visibleSize;
+
+	Point originPoint;
 	
 	void addGameLayers();
 
@@ -43,13 +48,13 @@ private:
 
 	void overGame();
 
-
+	void updateStarAcount();
 	//³¬Ç°ÒýÓÃ
 	class BackGroundLayer  *backLayer;
 
-	Stratosphere     *stratoLayer;
+	Stratosphere           *stratoLayer;
 
-	BulletinDelegate *bulletinDelegator;
+	BulletinDelegate       *bulletinDelegator;
 
 };
 

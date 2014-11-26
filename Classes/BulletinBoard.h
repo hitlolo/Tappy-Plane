@@ -22,7 +22,7 @@ public:
 
 	virtual void showBulletin(GAME_STATE);
 
-	virtual void updateStarAcount(int) override;
+	virtual void updateStarAcount() override;
 	
 	virtual void updateScore() override;
 

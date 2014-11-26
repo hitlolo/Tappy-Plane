@@ -35,7 +35,7 @@ void GameController::goState(GAME_STATE state)
 	case GAME_STATE::LOGO:
 		break;
 	case GAME_STATE::MENU:
-		this->playSceneSwitchEffect();
+		
 		scene = MenuScene::createScene();
 		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("MonkeyIslandBand.mp3", true);
 		break;
