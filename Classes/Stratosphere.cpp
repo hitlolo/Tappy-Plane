@@ -16,9 +16,6 @@ bool Stratosphere::init()
 	
 	this->addClouds();
 	this->addPlane();
-	/*this->runByState(MENU);*/
-
-
 
 	return true;
 }
@@ -136,10 +133,8 @@ void  Stratosphere::cloudScroll()
 
 void Stratosphere::update(float dt)
 {
-	//add puff
 
-
-	//scroll cloud and added puff
+	//scroll clouds and added puff
 	switch (this->getCurGameState())
 	{
 
@@ -194,25 +189,45 @@ void  Stratosphere::runByState(GAME_STATE state)
 	{
 
 	case GAME_STATE::MENU:
-		this->startScrolling();
-		this->schedule(CC_SCHEDULE_SELECTOR(Stratosphere::createPuff), 0.2f);
-		this->getPlaneSprite()->runByState(PLANE_STATE::STATE_IDEL);
+		startGameMenu();
 		break;
 	case GAME_STATE::READY:
-		this->startScrolling();
-		this->schedule(CC_SCHEDULE_SELECTOR(Stratosphere::createPuff), 0.2f);
-		this->getPlaneSprite()->runByState(PLANE_STATE::STATE_READY);
+		startGameReady();
 		break;
 	case GAME_STATE::GAMING:
-		this->getPlaneSprite()->runByState(PLANE_STATE::STATE_GAME);
+		startGameIng();
 		break;
 	case GAME_STATE::OVER:
-		this->stopScrolling();
-		this->getPlaneSprite()->runByState(PLANE_STATE::STATE_CRASH);
+		startGameOver();
 		break;
 
 	}
 	
+}
+
+void Stratosphere::startGameMenu()
+{
+	this->startScrolling();
+	this->schedule(CC_SCHEDULE_SELECTOR(Stratosphere::createPuff), 0.2f);
+	this->getPlaneSprite()->runByState(PLANE_STATE::STATE_IDEL);
+}
+
+void Stratosphere::startGameReady()
+{
+	this->startScrolling();
+	this->schedule(CC_SCHEDULE_SELECTOR(Stratosphere::createPuff), 0.2f);
+	this->getPlaneSprite()->runByState(PLANE_STATE::STATE_READY);
+}
+
+void Stratosphere::startGameIng()
+{
+	this->getPlaneSprite()->runByState(PLANE_STATE::STATE_GAME);
+}
+
+void Stratosphere::startGameOver()
+{
+	this->stopScrolling();
+	this->getPlaneSprite()->runByState(PLANE_STATE::STATE_CRASH);
 }
 
 void Stratosphere::createPuff(float delta)
@@ -244,10 +259,9 @@ void Stratosphere::puffScrollOut()
 	for (auto puff : this->puffVector)
 	{
 
-		if (puff->getPositionX() < -puff->getContentSize().width || puff->getOpacity() <= 0)
+		if ((puff->getPositionX() < -(puff->getContentSize().width)) || puff->getOpacity() <= 0)
 		{
 			puffEraseVector.pushBack(puff);
-			
 		}
 		else
 			puff->setPositionX(puff->getPositionX() - 1.0f);
@@ -277,12 +291,14 @@ void Stratosphere::onExit()
 
 Stratosphere::~Stratosphere()
 {
-	
+	//what have been newed! need to be deleted!
 	for (auto cloud : this->cloudVector) {
 		float* ptr = (float*)(cloud->getUserData());
 		CC_SAFE_DELETE(ptr);
 	}
 	cloudVector.clear();
 	puffVector.clear();
+	this->removeAllChildrenWithCleanup(true);
+	this->removeFromParentAndCleanup(true);
 }
 

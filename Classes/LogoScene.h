@@ -23,11 +23,9 @@ public:
 
 private:
 
-	virtual void onExit() override;
+	void loadRes();
 
 	void addLogo();
-
-	void loadRes();
 
 	void loadImageOver(Texture2D* texture);
 
@@ -36,6 +34,8 @@ private:
 	void startGame();
 
 	void nextScene();
+
+	virtual void onExit() override;
 };
 
 

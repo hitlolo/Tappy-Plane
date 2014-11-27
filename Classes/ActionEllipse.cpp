@@ -12,7 +12,7 @@ ActionEllipse::ActionEllipse()
 }
 
 ActionEllipse* ActionEllipse::create(float dt, const EllipseConfig& config)
-{//利用之前定义的椭圆的参数初始化椭圆
+{
 	
 	ActionEllipse *action = new ActionEllipse();
 	action->initWithDurationAndConfig(dt, config);
@@ -70,7 +70,8 @@ void ActionEllipse::update(float dt)
 		float x = getEllipsePositionX(dt);
 		float y = getEllipsePositionY(dt);
 		Point newPosition = _config.center + Point(x, y);
-		_target->setPosition(_config.center + Point(x, y));//由于我们画计算出的椭圆你做值是以原点为中心的，所以需要加上我们设定的中心点坐标
+		//由于我们画计算出的椭圆你做值是以原点为中心的，所以需要加上我们设定的中心点坐标
+		_target->setPosition(_config.center + Point(x, y));
 
 		if (dt <= 0.5){
 			_target->setLocalZOrder(_config.zOrder.first);

@@ -10,19 +10,18 @@ class RandomCacher{
 private:
 	static RandomCacher* _randomCacher;
 
-public:
-	static RandomCacher* getInstance();
-
-
-private:
 	random_device randomDevice;
 
 	mt19937*      mt;
 
 	~RandomCacher();
+
 public:
+
 	RandomCacher();
 
+	static RandomCacher* getInstance();
+	
 	int     getRandomByRange(int, int);
 
 	float   getRandomByRange(float, float);

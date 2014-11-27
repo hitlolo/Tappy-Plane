@@ -22,8 +22,6 @@ public:
 
 	~ActionRotation();
 
-	
-
 private:
 
 	void    setTargetParllelAction(Action* action);
@@ -31,7 +29,6 @@ private:
 	Node*   targetNode;
 
 	Action* targetAction;
-
 
 };
 

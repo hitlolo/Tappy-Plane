@@ -25,6 +25,7 @@ public:
 
 	virtual void showBulletin(GAME_STATE);
 
+	//those will be called by controller
 	virtual void updateStarAcount() override;
 	
 	virtual void updateScore() override;
@@ -62,15 +63,15 @@ private:
 	Label*  starLabel;
 
 	Node*   starNode;
-
-	ui::Text* scoreNumLabel;
-//
-	ui::Text* starNumLabel;
-
+	//score recorder
 	CC_SYNTHESIZE(int, curStar, CurStar);
 
 	CC_SYNTHESIZE(int, curScore, CurScore);
 	//over
+	ui::Text* scoreNumLabel;
+
+	ui::Text* starNumLabel;
+
 	virtual void showStateOver() override;
 
 	//callbacks

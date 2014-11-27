@@ -45,8 +45,6 @@ private:
 
 	int mapIndex;
 
-	TMXTiledMap* curMap;
-
 	Vector<TMXTiledMap*> mapVector;
 	
 	~StarLayer();

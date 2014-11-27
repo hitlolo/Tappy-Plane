@@ -44,9 +44,6 @@ void BulletinBoard::showBulletin(GAME_STATE state)
 			showStateOver();
 			break;
 		default:
-#if 1
-		CCLOG("show bulletin bug!");
-#endif
 			break;
 
 	}
@@ -135,7 +132,7 @@ void BulletinBoard::showStateReady()
 	// 73 is the height of the plane contenSize
 	tapSprite->setPosition(originPoint.x + visibleSize.width / 3 + 30, originPoint.y + visibleSize.height / 2 - 73);
 
-	Animate*        blink_ = Animate::create(tapAnimation);
+	Animate*  blink_ = Animate::create(tapAnimation);
 	tapSprite->runAction(RepeatForever::create(blink_));
 
 	this->addChild(tapSprite);
@@ -208,7 +205,7 @@ void BulletinBoard::showStateOver()
 	Node *rootNode = CSLoader::createNode("overMenu.csb");//传入Studio2.x的资源路径
 	rootNode->setPosition(originPoint.x + visibleSize.width / 2, -(originPoint.y + visibleSize.height / 2));
 	rootNode->runAction(MoveTo::create(0.4f, Point(originPoint.x + visibleSize.width / 2, originPoint.y + visibleSize.height / 2)));
-	this->addChild(rootNode);//假设this是即将显示的scene
+	this->addChild(rootNode);
 //
 	std::string file_name = JsonReader::getInstance()->getPathFromJson("over");
 	auto overSprite = Sprite::createWithSpriteFrameName(file_name);
@@ -222,6 +219,7 @@ void BulletinBoard::showStateOver()
 		restartButton->addClickEventListener(CC_CALLBACK_1(BulletinBoard::startGame,this));
 	}
 
+	//set font name again due to the cocos studio 2.0 bugs (Text load ttf error)
 	file_name = JsonReader::getInstance()->getPathFromJson("font_ttf");
 	this->starNumLabel = dynamic_cast<ui::Text*> (rootNode->getChildByName("starNumText"));
 	starNumLabel->setFontName(file_name);
@@ -234,6 +232,7 @@ void BulletinBoard::showStateOver()
 	auto bestNumLabel = dynamic_cast<ui::Text*> (rootNode->getChildByName("bestNumText"));
 	bestNumLabel->setFontName(file_name);
 
+	//user data record
 	int bestScore = 0;
 	bestScore = UserDefault::getInstance()->getIntegerForKey("best_score");
 	if (curScore > bestScore)
@@ -260,7 +259,7 @@ void BulletinBoard::showStateOver()
 void  BulletinBoard::startGame(Ref* sender)
 {
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("pop1.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_click.ogg");
 	GameController::getInstance()->goState(GAME_STATE::READY);;
 	
 #if 0
@@ -271,7 +270,7 @@ void  BulletinBoard::startGame(Ref* sender)
 void  BulletinBoard::showCreditsView(Ref* sender)
 {
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("pop1.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_click.ogg");
 	if (!creditView)
 	{
 		this->addCreditSprite();
@@ -348,5 +347,6 @@ void BulletinBoard::addStarAnimation(float time)
 
 BulletinBoard::~BulletinBoard()
 {
+	removeAllChildrenWithCleanup(true);
 	removeFromParentAndCleanup(true);
 }

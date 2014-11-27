@@ -12,8 +12,6 @@ public:
 	// Static interface
 	static ShapeCacher* getInstance(void);
 
-public:
-
 	void addShapesWithFile(const std::string &plist, PhysicsBody *body);
 
 private:

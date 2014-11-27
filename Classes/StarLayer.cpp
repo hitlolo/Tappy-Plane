@@ -8,15 +8,11 @@ bool StarLayer::init()
 		return false;
 	}
 	
-	
 	return true;
-
-
 }
 
 StarLayer::StarLayer()
 {
-	curMap = nullptr;
 
 	originPoint = Director::getInstance()->getVisibleOrigin();
 
@@ -33,8 +29,7 @@ StarLayer::StarLayer()
 	mapIndex = 0;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	struct  timeval  psv;
-	gettimeofday(&psv, NULL);    // 获取本地时间
-	//根据时间产生随机种子	
+	gettimeofday(&psv, NULL); 		
 	unsigned int tsrans = psv.tv_sec * 1000 + psv.tv_usec / 1000;	
 	srand(tsrans);
 #endif
@@ -53,24 +48,42 @@ StarLayer::StarLayer()
 	
 }
 
-StarLayer::~StarLayer()
-{
-	mapVector.clear();
-	mapLevelVector.clear();
-}
-
+//called every 10 seconds
 void StarLayer::addMapLayer(float time)
 {
 	
 	int type = mapLevelVector.at(mapIndex++);
+	/*
+	*mapIndex reaches the end of the map level vector 
+	*reshuffle it
+	*/
 	if (mapIndex == mapLevelVector.size())
 	{
 		random_shuffle(mapLevelVector.begin(), mapLevelVector.end());
 		mapIndex = 0;
 	}
+
 	createMapByType(type);
 }
 
+void StarLayer::createMapByType(int type)
+{
+	if (type == -1)
+	{
+		return;
+	}
+	else
+	{
+		std::string map_name = String::createWithFormat("map%d.tmx", type)->getCString();
+		auto curMap = TMXTiledMap::create(map_name);
+
+		getObjectsAndSet(curMap);
+		curMap->setPosition(originPoint.x + visibleSize.width, 0);
+		this->addChild(curMap);
+		this->mapVector.pushBack(curMap);
+
+	}
+}
 
 void StarLayer::getObjectsAndSet(TMXTiledMap* map)
 {
@@ -110,25 +123,7 @@ StarSprite* StarLayer::createStarAndSet(float x, float y, float rotation)
 	return star;
 }
 
-void StarLayer::createMapByType(int type)
-{
-	if (type == -1)
-	{
-		return;
-	}
-	else
-	{
-		std::string map_name = String::createWithFormat("map%d.tmx", type)->getCString();
-		auto curMap = TMXTiledMap::create(map_name);
 
-		getObjectsAndSet(curMap);
-		curMap->setPosition(originPoint.x + visibleSize.width, 0);
-		this->addChild(curMap);
-		this->mapVector.pushBack(curMap);
-		
-	}
-	
-}
 
 
 void StarLayer::startGame()
@@ -169,14 +164,6 @@ void StarLayer::update(float time)
 		{
 			mapEraser.pushBack(curMap);
 		}
-		/*float position_x = curMap->getPositionX();
-		curMap->setPositionX(position_x - 1.0f);
-		if (position_x < -((curMap->getMapSize().width * curMap->getTileSize().width)))
-		{
-			mapEraser.pushBack(curMap);
-			
-		}*/
-
 		for (auto map: mapEraser)
 		{
 			mapVector.eraseObject(map);
@@ -184,4 +171,12 @@ void StarLayer::update(float time)
 		}
 	}
 
+}
+
+StarLayer::~StarLayer()
+{
+	mapVector.clear();
+	mapLevelVector.clear();
+	removeAllChildrenWithCleanup(true);
+	removeFromParentAndCleanup(true);
 }

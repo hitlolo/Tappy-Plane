@@ -18,7 +18,6 @@ Scene* GameScene::createScene()
 	node->setPhysicsBody(body);
 	scene->addChild(node);
 #endif
-
 	auto game  = GameScene::create();
 	scene->addChild(game,0,"game");
 	return scene;
@@ -57,7 +56,6 @@ void GameScene::addGameLayers()
 	auto bulletinLayer = BulletinBoard::create();
 	bulletinDelegator = bulletinLayer;
 	this->addChild(bulletinLayer);
-	//
 	
 	auto touchLayer = TouchLayer::create();
 	touchLayer->setDelegator(this);
@@ -72,10 +70,8 @@ void GameScene::runByState(GAME_STATE state)
 	switch (state)
 	{
 	case GAME_STATE::LOGO:
-
-			break;
+		break;
 	case GAME_STATE::MENU:
-
 		break;
 	case GAME_STATE::READY:
 		readyGame();
@@ -86,7 +82,6 @@ void GameScene::runByState(GAME_STATE state)
 	case GAME_STATE::OVER:
 		overGame();
 		break;
-
 	}
 
 }
@@ -105,7 +100,7 @@ void GameScene::onTouch()
 			return;
 			break;
 		case GAME_STATE::READY:
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("pop1.ogg");
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_click.ogg");
 			GameController::getInstance()->goState(GAMING);
 			break;
 		case GAME_STATE::GAMING:
@@ -203,4 +198,11 @@ void GameScene::overGame()
 	this->backLayer->runByState(OVER);
 	this->bulletinDelegator->showBulletin(OVER);
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sfx_die.ogg");
+}
+
+
+GameScene::~GameScene()
+{
+	removeAllChildrenWithCleanup(true);
+	removeFromParentAndCleanup(true);
 }

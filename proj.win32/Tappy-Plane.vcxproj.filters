@@ -51,9 +51,6 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>classes\Gameing</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BackGroundLayer.cpp">
-      <Filter>classes\Gameing</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ActionEllipse.cpp">
       <Filter>classes\Action</Filter>
     </ClCompile>
@@ -65,9 +62,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\PlaneSprite.cpp">
       <Filter>classes\Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ActionSineCurve.cpp">
-      <Filter>classes\Action</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Stratosphere.cpp">
       <Filter>classes\Elements</Filter>
@@ -93,6 +87,9 @@
     <ClCompile Include="..\Classes\StarLayer.cpp">
       <Filter>classes\Elements</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BackGroundLayer.cpp">
+      <Filter>classes\Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -113,9 +110,6 @@
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>classes\Gameing</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\BackGroundLayer.h">
-      <Filter>classes\Gameing</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ActionEllipse.h">
       <Filter>classes\Action</Filter>
     </ClInclude>
@@ -130,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\PlaneSprite.h">
       <Filter>classes\Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ActionSineCurve.h">
-      <Filter>classes\Action</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Stratosphere.h">
       <Filter>classes\Elements</Filter>
@@ -162,6 +153,9 @@
       <Filter>classes\Elements</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StarLayer.h">
+      <Filter>classes\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackGroundLayer.h">
       <Filter>classes\Elements</Filter>
     </ClInclude>
   </ItemGroup>

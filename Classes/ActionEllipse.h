@@ -26,7 +26,8 @@ public:
 
 	static ActionEllipse *create(float dt, const EllipseConfig& config);
 	
-	bool initWithDurationAndConfig(float dt, const EllipseConfig& config);      //用“动作持续时间”和“椭圆控制参数”初始化动作
+	//用“动作持续时间”和“椭圆控制参数”初始化动作
+	bool initWithDurationAndConfig(float dt, const EllipseConfig& config);      
 	
 	virtual ActionEllipse* clone() const override;
 	

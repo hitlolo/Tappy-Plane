@@ -19,19 +19,18 @@ public:
 	
 	static Scene* createScene();
 
+	CREATE_FUNC(GameScene);
+
 	virtual bool init() override;
 	
 	virtual void onTouch() override;
-
-	CREATE_FUNC(GameScene);
 
 	void runByState(GAME_STATE);
 
 	void updateScore();
 
-	
-
 private:
+
 	Size  visibleSize;
 
 	Point originPoint;
@@ -55,6 +54,8 @@ private:
 	Stratosphere           *stratoLayer;
 
 	BulletinDelegate       *bulletinDelegator;
+
+	~GameScene();
 
 };
 

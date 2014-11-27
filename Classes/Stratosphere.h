@@ -14,24 +14,24 @@ class Stratosphere :public Layer{
 
 public:
 
-	virtual bool init() override;
+	CREATE_FUNC(Stratosphere);
 
-	void startScrolling();
+	virtual bool init() override;
 
 	void runByState(GAME_STATE);
 
-	CREATE_FUNC(Stratosphere);
-
 	CC_SYNTHESIZE(PlaneSprite*, planeSprite, PlaneSprite);
 
-	CC_SYNTHESIZE(GAME_STATE, curGameState, CurGameState);
-
 private:
-
+	
 	Point originPoint;
 
 	Size  visibleSize;
 
+	CC_SYNTHESIZE(GAME_STATE, curGameState, CurGameState);
+
+	//clouds
+	//decide how many clouds need to show
 	int   cloudAcount;
 
 	Vector<Sprite*> cloudVector;
@@ -54,6 +54,8 @@ private:
 
 	void    cloudScroll();
 
+	void    startScrolling();
+
 	void    stopScrolling();
 
 	virtual void update(float dt) override;
@@ -66,6 +68,16 @@ private:
 	void createPuff(float delta);
 
 	void puffScrollOut();
+
+	//controll
+
+	void startGameMenu();
+
+	void startGameReady();
+
+	void startGameIng();
+
+	void startGameOver();
 
 	//deconstructor delete usrdata
 	void onExit() override;

@@ -32,15 +32,16 @@ class BackGroundLayer : public Layer{
 
 public:
 	
-	virtual bool init() override;
-
 	CREATE_FUNC(BackGroundLayer);
+
+	virtual bool init() override;
 
 	virtual void update(float time) override;
 
 	CC_SYNTHESIZE(GAME_STATE, curState, CurState);
 	
 private:
+
 	Size  visibleSize;
 
 	Point originPoint;
@@ -51,8 +52,13 @@ private:
 	
 	std::string rockNameDown;
 
+	//back ground
 	void  addBackGround();
+	
+	//stars
+	void  addStarLayer();
 
+	//land
 	void  addLand();
 
 	int   getRandomLandType();
@@ -61,6 +67,7 @@ private:
 
 	Vector<Sprite*> landVector;
 
+	//rocks
 	Vector<Node*>   rockVector;
 
 	void  setRockNameAfterLandAdded();
@@ -82,20 +89,11 @@ private:
 	void  initRockPhysics(Node*, bool);
 
 	void  addRocks(float);
-
-	void  rockScrolling();
-
-	void  landScrolling();
 	
+	//controll
 	void  addElementsByState();
 
 	void  runByState(GAME_STATE);
-
-	void  getPoint();
-
-	bool  isGetPoint(Node*);
-
-	void  addStarLayer();
 
 	void  readyGame();
 
@@ -103,6 +101,16 @@ private:
 
 	void  overGame();
 
+	void  rockScrolling();
+
+	void  landScrolling();
+
+	//point check
+	void  getPoint();
+
+	bool  isGetPoint(Node*);
+
+	//deconstructor
 	~BackGroundLayer();
 
 };

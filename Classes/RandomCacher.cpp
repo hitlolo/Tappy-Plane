@@ -1,14 +1,9 @@
-
-
 #include "RandomCacher.h"
-
-
 
 RandomCacher* RandomCacher::_randomCacher = nullptr;
 
 RandomCacher* RandomCacher::getInstance()
 {
-
 	if (!_randomCacher)
 	{
 		_randomCacher = new RandomCacher();
@@ -22,7 +17,6 @@ RandomCacher* RandomCacher::getInstance()
 RandomCacher::RandomCacher()
 {
 	mt = new mt19937(randomDevice());
-
 }
 
 RandomCacher::~RandomCacher()
@@ -33,8 +27,6 @@ RandomCacher::~RandomCacher()
 
 int RandomCacher::getRandomByRange(int from, int to)
 {
-
-	
 	//std::default_random_engine random_e;
 	uniform_int_distribution<int> dist(from, to);
 	return dist(*mt);
@@ -42,7 +34,6 @@ int RandomCacher::getRandomByRange(int from, int to)
 
 float RandomCacher::getRandomByRange(float from, float to)
 {
-
 	//std::default_random_engine random_e;
 	uniform_real_distribution<float> dist(from, to);
 	return dist(*mt);

@@ -16,11 +16,9 @@ ActionRotation* ActionRotation::create(Action* action)
 
 bool ActionRotation::initWithAction(Action* action)
 {
-
 	action->retain();
 	this->targetAction = action;
 	return true;
-
 }
 
 void ActionRotation::startWithTarget(Node* target)
@@ -29,11 +27,9 @@ void ActionRotation::startWithTarget(Node* target)
 #if 0
 	CCLOG("HERE I COME!");
 #endif
-	
 	targetNode = target;
 	ActionInterval::startWithTarget(target);
 	targetAction->startWithTarget(target);
-
 }
 
 
@@ -71,7 +67,6 @@ void ActionRotation::step(float dt)
 		offsetDegree = 360;
 	}
 	degree = offsetDegree + CC_RADIANS_TO_DEGREES(degree);
-	//degree = offsetDegree + (degree / M_PI * 180);
 
 	targetNode->setRotation(degree);
 

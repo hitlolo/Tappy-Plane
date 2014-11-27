@@ -56,8 +56,7 @@ void  BackGroundLayer::runByState(GAME_STATE state)
 		this->readyGame();
 		break;
 	case GAME_STATE::GAMING:
-		this->startGame();
-		
+		this->startGame();		
 		break;
 	case GAME_STATE::OVER:
 		this->overGame();
@@ -73,16 +72,15 @@ void BackGroundLayer::addBackGround()
 	this->addChild(backGround);
 }
 
+//land
 int  BackGroundLayer::getRandomLandType()
 {
 	int land_type = RandomCacher::getInstance()->getRandomByRange(0, 4);
 	return land_type;
-
 }
 
 void BackGroundLayer::addLand()
 {
-
 	this->setCurLandType((LAND_TYPE)this->getRandomLandType());
 	std::string file_name;
 
@@ -111,7 +109,9 @@ void BackGroundLayer::addLand()
 	auto land_s = Sprite::createWithSpriteFrameName(file_name);
 	land_f->setPosition(originPoint.x + visibleSize.width / 2, originPoint.y + land_f->getContentSize().height / 2);
 	land_s->setPosition(originPoint.x + visibleSize.width / 2 + land_f->getContentSize().width - 5, originPoint.y + land_f->getContentSize().height / 2);
-
+	
+	//init physics attributes
+	//first
 	auto groundBody_f = PhysicsBody::create();
 	ShapeCacher::getInstance()->addShapesWithFile("groundShape.plist", groundBody_f);
 	groundBody_f->setDynamic(false);
@@ -121,7 +121,7 @@ void BackGroundLayer::addLand()
 	groundBody_f->setCollisionBitmask(COLLIDER_TYPE_PLANE);
 	groundBody_f->setContactTestBitmask(COLLIDER_TYPE_PLANE);
 	land_f->setPhysicsBody(groundBody_f);
-
+	//second
 	auto groundBody_s = PhysicsBody::create();
 	ShapeCacher::getInstance()->addShapesWithFile("groundShape.plist", groundBody_s);
 	groundBody_s->setDynamic(false);
@@ -133,17 +133,16 @@ void BackGroundLayer::addLand()
 	land_s->setPhysicsBody(groundBody_s);
 
 	//
-
 	this->landVector.pushBack(land_f);
 	this->landVector.pushBack(land_s);
 	this->addChild(land_f,3);
 	this->addChild(land_s,3);
 	
-	
 	//prepare for add rocks
 	this->setRockNameAfterLandAdded();
 }
 
+//rocks
 void  BackGroundLayer::setRockNameAfterLandAdded()
 {
 	switch (getCurLandType())
@@ -174,7 +173,6 @@ int   BackGroundLayer::getRandomRockType()
 {
 	int rock_type = RandomCacher::getInstance()->getRandomByRange(0, 4);
 	return rock_type;
-
 }
 
 Node* BackGroundLayer::createRockByType(ROCK_TYPE type)
@@ -201,6 +199,10 @@ Node* BackGroundLayer::createRockByType(ROCK_TYPE type)
 	return rock;
 }
 
+/*init rocks physics  attributs 
+**@parameter Node* rock_node 
+**@parameter bool is_up WHETHER rock is up or down
+*/
 void  BackGroundLayer::initRockPhysics(Node* rock,bool is_up)
 {
 	auto rockBody = PhysicsBody::create();
@@ -316,6 +318,7 @@ void BackGroundLayer::addRocks(float time)
 	auto rock = this->createRockByType(type);
 	this->rockVector.pushBack(rock);
 	this->addChild(rock,2,1);
+	//set tag 1. THE TAG WILL BE USED TO DECIDE WHETHER TO ADD A POINT OR NOT.
 
 }
 
@@ -435,4 +438,6 @@ BackGroundLayer::~BackGroundLayer()
 {
 	this->landVector.clear();
 	this->rockVector.clear();
+	this->removeAllChildrenWithCleanup(true);
+	this->removeFromParentAndCleanup(true);
 }

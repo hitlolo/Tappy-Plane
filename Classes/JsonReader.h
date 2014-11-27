@@ -27,7 +27,6 @@ private:
 
 	~JsonReader();
 	
-
 	static JsonReader* jsonReader;
 
 	std::string jsonStr;

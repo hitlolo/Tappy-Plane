@@ -17,7 +17,6 @@ GameController* GameController::getInstance()
 		if (!_controller)
 		{
 			CC_SAFE_DELETE(_controller);
-			CCLOG("_controller  INIT FAIL£¡");
 		}
 		return _controller;
 	}

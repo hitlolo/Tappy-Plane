@@ -24,7 +24,7 @@ void ShapeCacher::addShapesWithFile(const std::string &plist, PhysicsBody *body)
 {
 	std::string fullPath = FileUtils::getInstance()->fullPathForFilename(plist);
 	ValueMap dict = FileUtils::getInstance()->getValueMapFromFile(fullPath);
-
+	
 	addShapesWithDictionary(dict, body);
 
 }
@@ -33,15 +33,14 @@ void ShapeCacher::addShapesWithFile(const std::string &plist, PhysicsBody *body)
 
 void ShapeCacher::addShapesWithDictionary(ValueMap &dictionary, PhysicsBody *body)
 {
+	//decode the plist file
 	int format = 0;
-
 	// get the format
 	if (dictionary.find("metadata") != dictionary.end())
 	{
 		ValueMap& metadataDict = dictionary["metadata"].asValueMap();
 		format = metadataDict["format"].asInt();
 	}
-
 	// check the format
 	CCASSERT(format == 1, "format is not supported for #addShapesWithDictionary#:");
 
@@ -51,51 +50,46 @@ void ShapeCacher::addShapesWithDictionary(ValueMap &dictionary, PhysicsBody *bod
 	{
 		ValueMap& dataDict = iter->second.asValueMap();
 
-		//set anchorpoint
-		Point anchorPoint = PointFromString(dataDict["anchorpoint"].asString());
+		/****************not used yet!***********************/
+		//set anchorpoint	
+		//Point anchorPoint = PointFromString(dataDict["anchorpoint"].asString());
 	
-
 		ValueVector& fixtureVector = dataDict["fixtures"].asValueVector();
 
 		for (auto iter = fixtureVector.begin(); iter != fixtureVector.end(); ++iter)
 		{
 			ValueMap& fixtureDict =(ValueMap&)(*iter).asValueMap();
 
-			//body->setCategoryBitmask(fixtureDict["filter_categoryBits"].asInt);
-			//body->setCollisionBitmask(fixtureDict["filter_maskBits"].asInt);
-			//body->setGroup(fixtureDict["filter_groupIndex"].asInt);
+			/****************not used yet!***********************/
 
-			//float friction    = fixtureDict["friction"].asFloat;
-			//float density     = fixtureDict["density"].asFloat;
-			//float restitution = fixtureDict["restitution"].asFloat;
-			//int   isSensor    = fixtureDict["isSensor"].asInt;
-			//std::string userdata = fixtureDict["userdataCbValue"].asString;
+			/* //body->setCategoryBitmask(fixtureDict["filter_categoryBits"].asInt);
+			/* //body->setCollisionBitmask(fixtureDict["filter_maskBits"].asInt);
+			/* //body->setGroup(fixtureDict["filter_groupIndex"].asInt);
 
-			//std::string fixtureType = fixtureDict["fixture_type"].asString();
-
-			/*if (fixtureType == "POLYGON") 
+			/* //float friction    = fixtureDict["friction"].asFloat;
+			/* //float density     = fixtureDict["density"].asFloat;
+			/* //float restitution = fixtureDict["restitution"].asFloat;
+			/* //int   isSensor    = fixtureDict["isSensor"].asInt;
+			/* //std::string userdata = fixtureDict["userdataCbValue"].asString;
+			/* 
+			/* //std::string fixtureType = fixtureDict["fixture_type"].asString();
+			/* 
+			/* if (fixtureType == "POLYGON") 
 			{*/
-
+			/****************not used yet!***********************/
 			ValueVector& polygonsVector = (fixtureDict["polygons"].asValueVector());
 
 			for (auto iter = polygonsVector.begin(); iter != polygonsVector.end(); ++iter) 
 			{
-	
 				int vertexNum = (*iter).asValueVector().size();;
-
-				//Vector<std::string > polygonArray = *iter;
 				ValueVector polygonArray = (*iter).asValueVector();
-
 				Point *polyVertex = new Point[vertexNum];
-
 				int i = 0;
-
 				for (auto piter = polygonArray.begin(); piter != polygonArray.end(), i < vertexNum; ++piter ,i++)
 				{
 					Point vertex = PointFromString((*piter).asString());
 					polyVertex[i] = vertex;
 				}
-
 				body->addShape(PhysicsShapePolygon::create(polyVertex, vertexNum));
 				CC_SAFE_DELETE_ARRAY(polyVertex);
 			}
@@ -124,6 +118,5 @@ void ShapeCacher::addShapesWithDictionary(ValueMap &dictionary, PhysicsBody *bod
 		//		CCAssert(0, "Unknown fixtureType");
 		//	}
 		//}
-	
 	}
 }
