@@ -10,6 +10,8 @@
 
 <br>
 This is a tiny game developed for cocos2dx learning!     
+Perfectly run on my SUMSANG NOTE3!
+<br>
 I got all the art works from [opengameart.org](http://www.opengameart.org).
 Special THX to [kenny's](http://www.kenny.nl) great work.
 
