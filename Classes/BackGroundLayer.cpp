@@ -379,9 +379,9 @@ void BackGroundLayer::rockScrolling()
 }
 
 
-bool BackGroundLayer::isGetPoint(Node* pipe)
+bool BackGroundLayer::isGetPoint(Node* rock)
 {
-	return pipe->getPositionX() < CHECK_POINT;
+	return rock->getPositionX() < CHECK_POINT;
 }
 
 void   BackGroundLayer::getPoint()

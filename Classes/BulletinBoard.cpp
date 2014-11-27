@@ -169,7 +169,7 @@ void BulletinBoard::showStateGaming()
 	file_name = JsonReader::getInstance()->getPathFromJson("font_ttf");
 	this->starLabel = Label::createWithTTF("0", file_name, 50, Size::ZERO, TextHAlignment::CENTER, TextVAlignment::CENTER);
 	starLabel->enableOutline(Color4B(245, 178, 33, 155), 2);
-	auto starNode = Node::create(); 
+	this->starNode = Node::create(); 
 	this->starSprite->setAnchorPoint(Point(0, 1));
 	this->starLabel->setAnchorPoint(Point(0, 0.5));
 	starNode->setAnchorPoint(Point(0, 1));
@@ -184,7 +184,7 @@ void BulletinBoard::showStateGaming()
 
 void  BulletinBoard::updateStarAcount()
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("3_Coins.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("PickedCoinEcho.wav");
 	this->setCurStar(this->getCurStar() + 1);
 	auto str = String::createWithFormat("%d", getCurStar());
 	starLabel->setString(str->getCString());
@@ -202,8 +202,57 @@ void BulletinBoard::updateScore()
 
 void BulletinBoard::showStateOver()
 {
+	this->removeChild(scoreLabel);
+	this->removeChild(starNode);
 
+	Node *rootNode = CSLoader::createNode("overMenu.csb");//传入Studio2.x的资源路径
+	rootNode->setPosition(originPoint.x + visibleSize.width / 2, -(originPoint.y + visibleSize.height / 2));
+	rootNode->runAction(MoveTo::create(0.4f, Point(originPoint.x + visibleSize.width / 2, originPoint.y + visibleSize.height / 2)));
+	this->addChild(rootNode);//假设this是即将显示的scene
+//
+	std::string file_name = JsonReader::getInstance()->getPathFromJson("over");
+	auto overSprite = Sprite::createWithSpriteFrameName(file_name);
+	overSprite->setPosition(originPoint.x + visibleSize.width / 2, originPoint.y + visibleSize.height + overSprite->getContentSize().height);
+	overSprite->runAction(MoveTo::create(0.4f, Point(originPoint.x + visibleSize.width / 2, originPoint.y + visibleSize.height / 10 * 8)));
+	this->addChild(overSprite);
 
+	auto restartButton = dynamic_cast<ui::Button*> (rootNode->getChildByName("restartButton"));
+	if (restartButton)
+	{
+		restartButton->addClickEventListener(CC_CALLBACK_1(BulletinBoard::startGame,this));
+	}
+
+	file_name = JsonReader::getInstance()->getPathFromJson("font_ttf");
+	this->starNumLabel = dynamic_cast<ui::Text*> (rootNode->getChildByName("starNumText"));
+	starNumLabel->setFontName(file_name);
+	auto scoreLabel = dynamic_cast<ui::Text*> (rootNode->getChildByName("scoreText"));
+	scoreLabel->setFontName(file_name);
+	this->scoreNumLabel = dynamic_cast<ui::Text*> (rootNode->getChildByName("scoreNumText"));
+	scoreNumLabel->setFontName(file_name);
+	auto bestLabel = dynamic_cast<ui::Text*> (rootNode->getChildByName("bestText"));
+	bestLabel->setFontName(file_name);
+	auto bestNumLabel = dynamic_cast<ui::Text*> (rootNode->getChildByName("bestNumText"));
+	bestNumLabel->setFontName(file_name);
+
+	int bestScore = 0;
+	bestScore = UserDefault::getInstance()->getIntegerForKey("best_score");
+	if (curScore > bestScore)
+	{
+		bestScore = curScore;
+		UserDefault::getInstance()->setIntegerForKey("best_score", bestScore);
+
+	}
+	bestNumLabel->setText(String::createWithFormat("%d", bestScore)->getCString());
+
+	if (curScore > 0)
+	{
+		this->schedule(CC_SCHEDULE_SELECTOR(BulletinBoard::addScoreAnimation), 0.2f);
+	}
+	if (curStar > 0)
+	{
+		this->schedule(CC_SCHEDULE_SELECTOR(BulletinBoard::addStarAnimation), 0.2f);
+	}
+	
 }
 
 
@@ -262,4 +311,42 @@ void BulletinBoard::addCreditSprite()
 	thanks->setPosition(originPoint.x + creditView->getContentSize().width / 2, originPoint.y + creditView->getContentSize().height - 100);
 	creditView->addChild(thanks);
 
+}
+
+
+void BulletinBoard::addScoreAnimation(float time)
+{
+	int i;
+	sscanf(this->scoreNumLabel->getStringValue().c_str(), "%d", &i);
+	if (i < this->getCurScore())
+	{
+		i++;
+		scoreNumLabel->setText(String::createWithFormat("%d", i)->getCString());
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("PickedCoinEcho.wav");
+	}
+	else if (i == this->getCurScore())
+	{
+		this->unschedule(CC_SCHEDULE_SELECTOR(BulletinBoard::addScoreAnimation));
+	}
+}
+
+void BulletinBoard::addStarAnimation(float time)
+{
+	int i;
+	sscanf(this->starNumLabel->getStringValue().c_str(), "%d", &i);
+	if (i < this->getCurStar())
+	{
+		i++;
+		starNumLabel->setText(String::createWithFormat("%d", i)->getCString());
+	}
+	else if (i == this->getCurStar())
+	{
+		this->unschedule(CC_SCHEDULE_SELECTOR(BulletinBoard::addStarAnimation));
+	}
+}
+
+
+BulletinBoard::~BulletinBoard()
+{
+	removeFromParentAndCleanup(true);
 }

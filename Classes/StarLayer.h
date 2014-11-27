@@ -9,7 +9,6 @@
 #include "Data.h"
 #include "JsonReader.h"
 #include "StarSprite.h"
-
 USING_NS_CC;
 
 class StarLayer:public Layer

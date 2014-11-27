@@ -31,8 +31,26 @@ StarLayer::StarLayer()
 		this->mapLevelVector.push_back(map[i]);
 	}
 	mapIndex = 0;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	struct  timeval  psv;
+	gettimeofday(&psv, NULL);    // 获取本地时间
+	//根据时间产生随机种子	
+	unsigned int tsrans = psv.tv_sec * 1000 + psv.tv_usec / 1000;	
+	srand(tsrans);
+#endif
+
+
+#if ( CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 )
+	//struct tm *tm;
+	time_t timep;
+	//time(&timep);
+	//tm = localtime(&timep);
+	srand((unsigned int)time(&timep));
+#endif
+
 	random_shuffle(mapLevelVector.begin(), mapLevelVector.end());
 
+	
 }
 
 StarLayer::~StarLayer()

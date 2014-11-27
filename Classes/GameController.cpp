@@ -40,7 +40,6 @@ void GameController::goState(GAME_STATE state)
 		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("MonkeyIslandBand.mp3", true);
 		break;
 	case GAME_STATE::READY:
-		this->playSceneSwitchEffect();
 		scene = GameScene::createScene();
 		break;
 	case GAME_STATE::GAMING:

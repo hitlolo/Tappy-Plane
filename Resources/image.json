@@ -40,7 +40,8 @@
         "rock_ice_down":"rockIceDown.png",
         "rock_snow_up":"rockSnow.png",
         "rock_snow_down":"rockSnowDown.png",
-        "star_gold":"starGold.png"
+        "star_gold":"starGold.png",
+        "over":"textGameOver.png"
 
 }
 

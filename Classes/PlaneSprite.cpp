@@ -14,6 +14,7 @@ bool PlaneSprite::init()
 
 	this->createPlane();
 	this->initPhysicsAttributes();
+	
 	return true;
 
 }
@@ -198,7 +199,10 @@ void PlaneSprite::runByState(PLANE_STATE state)
 
 void PlaneSprite::update(float time)
 {
-
+	if (this->getPositionY()>(originPoint.y + visibleSize.height))
+	{
+		this->setPositionY(originPoint.y + visibleSize.height);
+	}
 	//set the angle of the bird depends on the velocity.
 	this->setRotation(this->getPhysicsBody()->getVelocity().y*-0.1);
 }

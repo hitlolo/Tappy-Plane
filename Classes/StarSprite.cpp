@@ -44,7 +44,7 @@ void StarSprite::initPhysics()
 void StarSprite::runStarAction()
 {
 	this->setTag(1);
-	auto move = MoveTo::create(0.6f, Point(-(visibleSize.width - 20), originPoint.y + visibleSize.height - 10));
+	auto move = MoveTo::create(0.6f, Point(-(visibleSize.width - 20), originPoint.y + visibleSize.height - 20));
 	auto fade_out = FadeOut::create(0.3f);
 	auto call_back = CCCallFunc::create(CC_CALLBACK_0(StarSprite::dispearCallback,this));
 	auto my_action = Sequence::create(move, fade_out, call_back, nullptr);
