@@ -19,8 +19,6 @@ public:
 
 	CREATE_FUNC(LogoScene);
 
-	
-
 private:
 
 	void loadRes();

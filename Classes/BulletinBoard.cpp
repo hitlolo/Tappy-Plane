@@ -245,11 +245,11 @@ void BulletinBoard::showStateOver()
 
 	if (curScore > 0)
 	{
-		this->schedule(CC_SCHEDULE_SELECTOR(BulletinBoard::addScoreAnimation), 0.2f);
+		this->schedule(CC_SCHEDULE_SELECTOR(BulletinBoard::addScoreAnimation), 0.15f);
 	}
 	if (curStar > 0)
 	{
-		this->schedule(CC_SCHEDULE_SELECTOR(BulletinBoard::addStarAnimation), 0.2f);
+		this->schedule(CC_SCHEDULE_SELECTOR(BulletinBoard::addStarAnimation), 0.15f);
 	}
 	
 }

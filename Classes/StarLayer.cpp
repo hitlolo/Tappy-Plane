@@ -27,24 +27,8 @@ StarLayer::StarLayer()
 		this->mapLevelVector.push_back(map[i]);
 	}
 	mapIndex = 0;
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	struct  timeval  psv;
-	gettimeofday(&psv, NULL); 		
-	unsigned int tsrans = psv.tv_sec * 1000 + psv.tv_usec / 1000;	
-	srand(tsrans);
-#endif
 
-
-#if ( CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 )
-	//struct tm *tm;
-	time_t timep;
-	//time(&timep);
-	//tm = localtime(&timep);
-	srand((unsigned int)time(&timep));
-#endif
-
-	random_shuffle(mapLevelVector.begin(), mapLevelVector.end());
-
+	randMap();
 	
 }
 
@@ -59,11 +43,21 @@ void StarLayer::addMapLayer(float time)
 	*/
 	if (mapIndex == mapLevelVector.size())
 	{
-		random_shuffle(mapLevelVector.begin(), mapLevelVector.end());
+		randMap();
 		mapIndex = 0;
 	}
 
 	createMapByType(type);
+}
+
+void StarLayer::randMap()
+{
+	random_shuffle(mapLevelVector.begin(), mapLevelVector.end(), CC_CALLBACK_1(StarLayer::myShuffleRand, this));
+}
+
+int  StarLayer::myShuffleRand(int index)
+{
+	return RandomCacher::getInstance()->getRandomByRange(1, 20) % index;
 }
 
 void StarLayer::createMapByType(int type)

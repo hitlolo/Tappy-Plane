@@ -20,13 +20,16 @@ public:
 
 	virtual bool init() override;
 
+	StarLayer();
+
+	~StarLayer();
+
 	virtual void update(float) override;
 
 	void startGame();
 
 	void overGame();
 
-	StarLayer();
 
 private:
 	Point originPoint;
@@ -46,8 +49,12 @@ private:
 	int mapIndex;
 
 	Vector<TMXTiledMap*> mapVector;
+
+	void randMap();
+
+	int  myShuffleRand(int index);
 	
-	~StarLayer();
+
 };
 
 

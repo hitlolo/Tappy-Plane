@@ -1,5 +1,3 @@
-
-
 #include "LogoScene.h"
 
 
@@ -13,7 +11,6 @@ Scene* LogoScene::createScene()
 	scene->addChild(layer);
 
 	return scene;
-
 
 }
 
@@ -46,8 +43,6 @@ void LogoScene::addLogo()
 
 void  LogoScene::loadRes()
 {
-
-	//Sprite* Sprite::create(const std::string& filename)
 	//void TextureCache::addImageAsync(const std::string &path, const std::function<void(Texture2D*)>& callback)
 	Director::getInstance()->getTextureCache()->addImageAsync("tappyplane.png", CC_CALLBACK_1(LogoScene::loadImageOver, this));
 
@@ -86,17 +81,12 @@ void LogoScene::startGame()
 
 
 void LogoScene::nextScene()
-{
-
-	
+{	
 	GameController::getInstance()->goState(GAME_STATE::MENU);
-
 }
 
 void LogoScene::onExit()
 {
-
 	Layer::onExit();
 	this->stopAllActions();
-
 }

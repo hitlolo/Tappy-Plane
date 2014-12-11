@@ -26,6 +26,8 @@ public:
 
 	float   getRandomByRange(float, float);
 
+	
+
 };
 
 #endif

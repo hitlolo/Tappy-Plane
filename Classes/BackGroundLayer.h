@@ -67,6 +67,8 @@ private:
 
 	Vector<Sprite*> landVector;
 
+	void  initLandPhysics(Sprite*);
+
 	//rocks
 	Vector<Node*>   rockVector;
 

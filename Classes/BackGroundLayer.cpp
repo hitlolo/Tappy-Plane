@@ -42,29 +42,6 @@ void BackGroundLayer::addElementsByState()
 
 }
 
-void  BackGroundLayer::runByState(GAME_STATE state)
-{
-
-	this->setCurState(state);
-
-	switch (curState)
-	{
-	case GAME_STATE::MENU:
-		return;
-		break;
-	case GAME_STATE::READY:
-		this->readyGame();
-		break;
-	case GAME_STATE::GAMING:
-		this->startGame();		
-		break;
-	case GAME_STATE::OVER:
-		this->overGame();
-	default:
-		return;
-	}
-}
-
 void BackGroundLayer::addBackGround()
 {
 	auto backGround = Sprite::createWithSpriteFrameName(JsonReader::getInstance()->getPathFromJson("background"));
@@ -73,12 +50,6 @@ void BackGroundLayer::addBackGround()
 }
 
 //land
-int  BackGroundLayer::getRandomLandType()
-{
-	int land_type = RandomCacher::getInstance()->getRandomByRange(0, 4);
-	return land_type;
-}
-
 void BackGroundLayer::addLand()
 {
 	this->setCurLandType((LAND_TYPE)this->getRandomLandType());
@@ -93,10 +64,10 @@ void BackGroundLayer::addLand()
 	case LAND_TYPE::DIRT:
 		file_name = JsonReader::getInstance()->getPathFromJson("land_dirt");
 		break;
-	//too ugly
-	//case LAND_TYPE::ROCK:
-	//	file_name = JsonReader::getInstance()->getPathFromJson("land_rock");
-	//	break;
+		//too ugly
+		//case LAND_TYPE::ROCK:
+		//	file_name = JsonReader::getInstance()->getPathFromJson("land_rock");
+		//	break;
 	case LAND_TYPE::SNOW:
 		file_name = JsonReader::getInstance()->getPathFromJson("land_snow");
 		break;
@@ -109,37 +80,46 @@ void BackGroundLayer::addLand()
 	auto land_s = Sprite::createWithSpriteFrameName(file_name);
 	land_f->setPosition(originPoint.x + visibleSize.width / 2, originPoint.y + land_f->getContentSize().height / 2);
 	land_s->setPosition(originPoint.x + visibleSize.width / 2 + land_f->getContentSize().width - 5, originPoint.y + land_f->getContentSize().height / 2);
-	
+
 	//init physics attributes
 	//first
-	auto groundBody_f = PhysicsBody::create();
-	ShapeCacher::getInstance()->addShapesWithFile("groundShape.plist", groundBody_f);
-	groundBody_f->setDynamic(false);
-	groundBody_f->setGravityEnable(false);
-	groundBody_f->setLinearDamping(0.0f);
-	groundBody_f->setCategoryBitmask(COLLIDER_TYPE_LAND);
-	groundBody_f->setCollisionBitmask(COLLIDER_TYPE_PLANE);
-	groundBody_f->setContactTestBitmask(COLLIDER_TYPE_PLANE);
-	land_f->setPhysicsBody(groundBody_f);
+	this->initLandPhysics(land_f);
 	//second
-	auto groundBody_s = PhysicsBody::create();
-	ShapeCacher::getInstance()->addShapesWithFile("groundShape.plist", groundBody_s);
-	groundBody_s->setDynamic(false);
-	groundBody_s->setGravityEnable(false);
-	groundBody_s->setLinearDamping(0.0f);
-	groundBody_s->setCategoryBitmask(COLLIDER_TYPE_LAND);
-	groundBody_s->setCollisionBitmask(COLLIDER_TYPE_PLANE);
-	groundBody_s->setContactTestBitmask(COLLIDER_TYPE_PLANE);
-	land_s->setPhysicsBody(groundBody_s);
+	this->initLandPhysics(land_s);
 
 	//
 	this->landVector.pushBack(land_f);
 	this->landVector.pushBack(land_s);
-	this->addChild(land_f,3);
-	this->addChild(land_s,3);
-	
+	this->addChild(land_f, 3);
+	this->addChild(land_s, 3);
+
 	//prepare for add rocks
 	this->setRockNameAfterLandAdded();
+}
+
+void BackGroundLayer::addStarLayer()
+{
+	StarLayer = StarLayer::create();
+	this->addChild(StarLayer);
+}
+
+int  BackGroundLayer::getRandomLandType()
+{
+	int land_type = RandomCacher::getInstance()->getRandomByRange(0, 4);
+	return land_type;
+}
+
+void  BackGroundLayer::initLandPhysics(Sprite* land)
+{
+	auto groundBody = PhysicsBody::create();
+	ShapeCacher::getInstance()->addShapesWithFile("groundShape.plist", groundBody);
+	groundBody->setDynamic(false);
+	groundBody->setGravityEnable(false);
+	groundBody->setLinearDamping(0.0f);
+	groundBody->setCategoryBitmask(COLLIDER_TYPE_LAND);
+	groundBody->setCollisionBitmask(COLLIDER_TYPE_PLANE);
+	groundBody->setContactTestBitmask(COLLIDER_TYPE_PLANE);
+	land->setPhysicsBody(groundBody);
 }
 
 //rocks
@@ -148,20 +128,20 @@ void  BackGroundLayer::setRockNameAfterLandAdded()
 	switch (getCurLandType())
 	{
 	case LAND_TYPE::DIRT:
-		rockNameUp   = JsonReader::getInstance()->getPathFromJson("rock_dirt_up");
+		rockNameUp = JsonReader::getInstance()->getPathFromJson("rock_dirt_up");
 		rockNameDown = JsonReader::getInstance()->getPathFromJson("rock_dirt_down");
 		break;
 	case LAND_TYPE::ROCK:
 	case LAND_TYPE::GRASS:
-		rockNameUp   = JsonReader::getInstance()->getPathFromJson("rock_grass_up");
+		rockNameUp = JsonReader::getInstance()->getPathFromJson("rock_grass_up");
 		rockNameDown = JsonReader::getInstance()->getPathFromJson("rock_grass_down");
 		break;
 	case LAND_TYPE::SNOW:
-		rockNameUp   = JsonReader::getInstance()->getPathFromJson("rock_snow_up");
+		rockNameUp = JsonReader::getInstance()->getPathFromJson("rock_snow_up");
 		rockNameDown = JsonReader::getInstance()->getPathFromJson("rock_snow_down");
 		break;
 	case LAND_TYPE::ICE:
-		rockNameUp   = JsonReader::getInstance()->getPathFromJson("rock_ice_up");
+		rockNameUp = JsonReader::getInstance()->getPathFromJson("rock_ice_up");
 		rockNameDown = JsonReader::getInstance()->getPathFromJson("rock_ice_down");
 		break;
 
@@ -199,11 +179,11 @@ Node* BackGroundLayer::createRockByType(ROCK_TYPE type)
 	return rock;
 }
 
-/*init rocks physics  attributs 
-**@parameter Node* rock_node 
+/*init rocks physics  attributs
+**@parameter Node* rock_node
 **@parameter bool is_up WHETHER rock is up or down
 */
-void  BackGroundLayer::initRockPhysics(Node* rock,bool is_up)
+void  BackGroundLayer::initRockPhysics(Node* rock, bool is_up)
 {
 	auto rockBody = PhysicsBody::create();
 	if (is_up)
@@ -213,7 +193,7 @@ void  BackGroundLayer::initRockPhysics(Node* rock,bool is_up)
 	else if (!is_up)
 	{
 		ShapeCacher::getInstance()->addShapesWithFile("rockDownShape.plist", rockBody);
-	}	
+	}
 	rockBody->setDynamic(false);
 	rockBody->setGravityEnable(false);
 	rockBody->setLinearDamping(0.0f);
@@ -226,9 +206,9 @@ void  BackGroundLayer::initRockPhysics(Node* rock,bool is_up)
 Node*  BackGroundLayer::rockSingleDown()
 {
 	auto rock = Sprite::createWithSpriteFrameName(this->rockNameUp);
-	this->initRockPhysics(rock,true);
+	this->initRockPhysics(rock, true);
 	float x = originPoint.x + visibleSize.width + rock->getContentSize().width / 2;
-	float y = RandomCacher::getInstance()->getRandomByRange(70.0F, rock->getContentSize().height/2);
+	float y = RandomCacher::getInstance()->getRandomByRange(70.0F, rock->getContentSize().height / 2);
 	rock->setPosition(x, y);
 	return rock;
 }
@@ -239,8 +219,8 @@ Node*  BackGroundLayer::rockSingleUp()
 	this->initRockPhysics(rock, false);
 	float x = originPoint.x + visibleSize.width + rock->getContentSize().width / 2;
 	float from = originPoint.y + visibleSize.height - rock->getContentSize().height / 2;
-	float to   = originPoint.y + visibleSize.height - rock->getContentSize().height / 2 + 20;
-	float y = RandomCacher::getInstance()->getRandomByRange(from,to);
+	float to = originPoint.y + visibleSize.height - rock->getContentSize().height / 2 + 20;
+	float y = RandomCacher::getInstance()->getRandomByRange(from, to);
 	rock->setPosition(x, y);
 	return rock;
 
@@ -249,13 +229,13 @@ Node*  BackGroundLayer::rockSingleUp()
 Node*  BackGroundLayer::rockUpandDown()
 {
 	auto rockNode = Node::create();
-	auto rockUp   = Sprite::createWithSpriteFrameName(this->rockNameUp);
+	auto rockUp = Sprite::createWithSpriteFrameName(this->rockNameUp);
 	auto rockDown = Sprite::createWithSpriteFrameName(this->rockNameDown);
 	this->initRockPhysics(rockUp, true);
 	this->initRockPhysics(rockDown, false);
-	
-	rockUp->setPosition(0, -(rockUp->getContentSize().height/2));
-	rockDown->setPosition(0, THROUGH_PASS + rockDown->getContentSize().height/2);
+
+	rockUp->setPosition(0, -(rockUp->getContentSize().height / 2));
+	rockDown->setPosition(0, THROUGH_PASS + rockDown->getContentSize().height / 2);
 	rockNode->addChild(rockUp);
 	rockNode->addChild(rockDown);
 
@@ -277,14 +257,14 @@ Node*  BackGroundLayer::rockTwinsUp()
 	float scale = RandomCacher::getInstance()->getRandomByRange(0.5f, 1.2f);
 	rock_s->setScale(scale);
 	rock_s->setPositionX(rock_f->getContentSize().width / 2);
-	rock_s->setPositionY(rock_f->getContentSize().height / 2 - rock_s->getContentSize().height * scale / 2 );
-	
+	rock_s->setPositionY(rock_f->getContentSize().height / 2 - rock_s->getContentSize().height * scale / 2);
+
 	rockNode->addChild(rock_f);
 	rockNode->addChild(rock_s);
 	rockNode->setContentSize(rock_f->getContentSize());
 	float x = originPoint.x + visibleSize.width + rockNode->getContentSize().width / 2;
 	float y = originPoint.y + visibleSize.height - rockNode->getContentSize().height / 2;
-	rockNode->setPosition(x,y);
+	rockNode->setPosition(x, y);
 	rockNode->setContentSize(rock_f->getContentSize() * 2);
 	return rockNode;
 }
@@ -317,16 +297,34 @@ void BackGroundLayer::addRocks(float time)
 
 	auto rock = this->createRockByType(type);
 	this->rockVector.pushBack(rock);
-	this->addChild(rock,2,1);
+	this->addChild(rock, 2, 1);
 	//set tag 1. THE TAG WILL BE USED TO DECIDE WHETHER TO ADD A POINT OR NOT.
 
 }
 
-void BackGroundLayer::addStarLayer()
+void  BackGroundLayer::runByState(GAME_STATE state)
 {
-	StarLayer = StarLayer::create();
-	this->addChild(StarLayer);
+
+	this->setCurState(state);
+
+	switch (curState)
+	{
+	case GAME_STATE::MENU:
+		return;
+		break;
+	case GAME_STATE::READY:
+		this->readyGame();
+		break;
+	case GAME_STATE::GAMING:
+		this->startGame();		
+		break;
+	case GAME_STATE::OVER:
+		this->overGame();
+	default:
+		return;
+	}
 }
+
 
 void BackGroundLayer::landScrolling()
 {
